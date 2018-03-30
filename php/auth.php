@@ -1,7 +1,9 @@
 <?php
 function auth($login, $passwd)
 {
-	$accounts = unserialize(file_get_contents($ROOT_DIR . '/ddb/passwd'));
+	$passwd_file = $_ENV['DATA_DIR'] . "/" . $_ENV['PASSWD_DB'];
+	flock($passwd_file);
+	$accounts = unserialize(file_get_contents($passwd_file));
 	foreach($accounts as $key => $account)
 	{
 		if ($account['login'] == $login)
@@ -11,7 +13,7 @@ function auth($login, $passwd)
 				if (password_needs_rehash($account['passwd'], PASSWORD_DEFAULT))
 				{
 					$accounts[$key]['passwd'] = password_hash($passwd, PASSWORD_DEFAULT);
-					file_put_contents($_ENV['DATA_DIR'] . "/" . $_ENV['PASSWD_DB'] , serialize($accounts));
+					file_put_contents($passwd_file, serialize($accounts));
 				}
 				return (TRUE);
 			}

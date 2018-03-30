@@ -16,12 +16,12 @@ function search_account($tab_accounts, $login)
 
 function create_account()
 {
-	$ROOT_DIR = '..';
+	$passwd_file = $_ENV['DATA_DIR'] . "/" . $_ENV['PASSWD_DB'];
 	if (has_value('login') && has_value('password') && has_value('submit') && $_POST['submit'] == "OK")
 	{
 		$login = $_POST['login'];
 		$passwd = $_POST['passwd'];
-		if (file_exists($_ENV['DATA_DIR'] . "/" . $_ENV['PASSWD_DB']))
+		if (file_exists($passwd_file))
 		{
 			$tab_accounts = unserialize(file_get_contents($ROOT_DIR . '/ddb/passwd'));
 			$account = search_account($tab_accounts, $login);
@@ -36,7 +36,7 @@ function create_account()
 				'passwd' => password_hash($passwd, PASSWORD_DEFAULT),
 				'group' => 'active');
 			$tab_accounts[] = $account;
-			file_put_contents($_ENV['DATA_DIR'] . "/" . $_ENV['PASSWD_DB'], serialize($tab_accounts));
+			file_put_contents(, serialize($tab_accounts));
 			return (true);
 		}
 	}
