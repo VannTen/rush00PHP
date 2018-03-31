@@ -14,7 +14,22 @@ if (!empty($_GET['ajouter']))
 	if (!empty($_SESSION["panier"]))
 		$panier_count = sizeof($_SESSION["panier"]);
 ?>
-<a href="panier.php">Voir le panier</a> (<?php print $panier_count; if ($panier_count == 0) echo " produit"; else echo " produits";?>)
+<html>
+    <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link href="../css/menu.css" rel="stylesheet" media="all" type="text/css">
+    	<title>Site E-commerce</title>
+
+    </head>
+	<body>
+		<header>
+			<ul id="menu_horizontal">
+				<li class="bouton_gauche"><a href="../index.php">Accueil</a></li>
+				<li class="bouton_gauche active"><a href="../html/boutique.php">Shop</a></li>
+				<li class="bouton_gauche"><a href="../html/panier.php">Panier <span style="font-size:15px; margin-top : -2000px;"><?php print $panier_count; if ($panier_count == 0) echo " produit"; else echo " produits";?></span></a></li>
+				<?php include '../php/onglet_connect.php'; ?>
+			</ul>
+		</header>
 <a href="admin_article.php">Accès a la page de gestion de produit</a><br>
 <br>
 <br>
@@ -29,26 +44,34 @@ if (file_exists("../bdd/article"))
 	$file2 = unserialize($data2);
 	foreach ($file as $elt)
 	{
-		echo "<br>".$elt['name']."<br>";
+		echo "<br><br><div style='width: 100%; color:black; background-color: lightgrey; border-radius: 10px; text-align:center; height: 35px; vertical-align: middle; line-height: 35px; font-size:22px'>".$elt['name']."</div><br>";
 		foreach ($file2 as $elt2)
 		{
 			if (in_array($elt['value'], $elt2['categorie']))
 			{
-				echo '<div style="display: inline-block; padding-right: auto; width : 20%; text-align:center;
-				min-width:200px; padding-left: auto; border : 1px solid black; margin-right: 10px;
-				margin-bottom: 10px">';
-				echo '<p>Nom : '.$elt2['name'].' </p>';
-				echo '<p>Description : '.$elt2['description'].' </p>';
-				echo '<p>Catégorie : ';
+				echo '<div style="display: inline-block;border-radius: 5px; padding-right: auto; width : 20%; text-align:center;
+				min-width:200px; padding-left: auto; border : 1px solid black; margin-right: 10px; line-height : 1.6;
+				margin-bottom: 10px; background-color:FloralWhite;">';
+
+				echo '<span style="color:black">Nom : '.$elt2['name'].' <br></span>';
+				echo '<span style="color:black">Description : '.$elt2['description'].' <br></span>';
+				echo '<span style="color:black">Catégorie : ';
 				$N = count($elt2["categorie"]);
 				for($i=0; $i < $N; $i++)
 					echo($elt2["categorie"][$i]."<br>");
-				echo ' </p>';
-				echo '<p>Prix : '.$elt2['prix'].' €</p>';
+				echo ' <br></span>';
+				echo '<span style="color:black">Prix : '.$elt2['prix'].' €<br></span>';
 				echo "<button onClick='location.href=\"boutique.php?ajouter=".$elt2['name']."\"'>Ajouter produit</button><br>";
 				echo '</div>';
 			}
 		}
 	}
 }
+
 ?>
+<footer id="footer">
+	<hr>
+	<p id="copyright">© ajugnon 2018</p>
+</footer>
+</body>
+</html>
