@@ -10,13 +10,13 @@
 {
 ?>
 		<li class="bouton_droite">
-			<a href="../html/admin_article.php"><?php echo "Bonjour ".$_SESSION['logged_on_user']; ?></a>
+			<a href="./html/admin_article.php"><?php echo "Bonjour ".$_SESSION['logged_on_user']; ?></a>
 		</li>
 <?php
 }
 ?>
 		<li class="bouton_droite">
-			<a href="../php/logout.php">Déconnexion</a>
+			<a href="./php/logout.php">Déconnexion</a>
 		</li>
 <?php
 	}
@@ -24,7 +24,7 @@
 	{
 ?>
 		<li class="bouton_droite">
-			<a href="../html/login.html">Connexion</a>
+			<a href="./html/login.html">Connexion</a>
 		</li>
 <?php
 	}
