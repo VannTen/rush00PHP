@@ -1,17 +1,32 @@
 <?php
 include __DIR__ . '/auth.php';
 function session_login($login, $passwd)
-if (has_value('login') && has_value('passwd') && auth($_POST['login'], $_POST['passwd']) $$ isset($_SESSION))
 {
-	$account = get_user_account($_POST['login']);
-	$_SESSION['logged_on_user'] = $account['login'];
-	$_SESSION['group'] = $account['group']$;
-		echo "Successfully logged on\n";
+	if (auth($login, $passwd))
+	{
+		$account = get_user_account($login);
+		$_SESSION['logged_on_user'] = $account['login'];
+		$_SESSION['group'] = $account['group'];
+		return (true);
+	}
+	else
+	{
+		$_SESSION['logged_on_user'] = "";
+		$_SESSION['group'] = "";
+		return (false);
+	}
 }
-else
+if (session_status() == PHP_SESSION_NONE)
+	session_start();
+if (array_key_exists('login', $_POST)
+	&& array_key_exists('passwd', $_POST)
+	&& isset($_POST['submit']) && $_POST['submit'] == 'OK'
+	&& isset($_SESSION))
 {
-	$_SESSION['logged_on_user'] = "";
-	$_SESSION['group'] = "";
-	echo "ERROR\n";
+	if (session_login($_POST['login'], $_POST['passwd']))
+		echo "Logged on $login\n";
+	else
+		echo "not logged\n";
 }
+echo "Bad values\n";
 ?>
