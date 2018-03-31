@@ -2,9 +2,9 @@
 include __DIR__ . '/auth.php';
 function session_login($login, $passwd)
 {
-	if (auth($login, $passwd))
+	$account = auth($login, $passwd);
+	if ($account != NULL)
 	{
-		$account = get_user_account($login);
 		$_SESSION['logged_on_user'] = $account['login'];
 		$_SESSION['group'] = $account['group'];
 		return (true);
@@ -24,9 +24,10 @@ if (array_key_exists('login', $_POST)
 	&& isset($_SESSION))
 {
 	if (session_login($_POST['login'], $_POST['passwd']))
-		echo "Logged on $login\n";
+		echo "Logged on " . $_POST['login'] . "\n";
 	else
 		echo "not logged\n";
 }
-echo "Bad values\n";
+else
+	echo "Bad values\n";
 ?>
