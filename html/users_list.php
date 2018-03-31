@@ -21,27 +21,28 @@ foreach ($accounts as $account)
 	echo '<form class="tr" action="update_user.php" method="POST" >' . "\n";
 	foreach ($account as $info => $value)
 	{
-		if (in_array($info, $options))
+		if (array_key_exists($info, $options))
 		{
 			echo  '<select class="td" name="' . $info  . '">' . "\n";
 			foreach($options[$info] as $option)
 			{
-				echo  '<option value="' . $option . '";';
+				echo  '<option value="' . $option . '"';
 				if ($account[$info] == $option)
-					echo 'selected>';
-				echo 	$option . '</option>' . "\n";
+					echo 'selected';
+				echo '>'  . $option . '</option>' . "\n";
 			}
+			echo '</select>';
 		}
 		else
 		{
 			echo '<input class="td" name="' . $info . '" value="';
-				if (!in_array($info, $dont_display))
-				  echo $value;
-				echo '"';
+			if (!in_array($info, $dont_display))
+				echo $value;
+			echo '"';
 			if (in_array($info, $non_modifiable))
 				echo 'disabled="disabled"';
+			echo " />\n";
 		}
-		echo " />\n";
 	}
 	echo "<br />\n";
 }
