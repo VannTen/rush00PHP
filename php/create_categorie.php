@@ -10,7 +10,6 @@ if (!empty($_POST['name']) && !empty($_POST['submit']))
 		$data = array(array('value'=>strtolower($_POST['name']), 'name'=>$_POST['name']));
 		$serial = serialize($data);
 		file_put_contents("../bdd/categorie", $serial);
-		echo "OK\n";
 		header("location:../html/create_categorie.php");
 	}
 	else
@@ -34,19 +33,16 @@ if (!empty($_POST['name']) && !empty($_POST['submit']))
 			$serial = serialize($file);
 			file_put_contents("../bdd/categorie", $serial);
 			flock($fd, LOCK_UN);
-			echo "OK\n";
 			header("location:../html/create_categorie.php");
 		}
 		else{
 			flock($fd, LOCK_UN);
 			$_SESSION['categorie_ajout'] = array('value'=>strtolower($_POST['name']), 'name'=>$_POST['name']);
-			echo "ERROR\n";
 			header("location:../html/create_categorie.php?erreur=name_existe");
 		}
 	}
 }
 else{
-	echo "ERROR\n";
 	header("location:../html/create_categorie.php?erreur=data_problem");
 }
 ?>

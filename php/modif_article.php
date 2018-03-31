@@ -5,7 +5,6 @@ if (!empty($_POST['newname']) && !empty($_POST['name']) && !empty($_POST['descri
 {
 	if (!preg_match_all("/^[0-9]+$/", $_POST['prix']))
 	{
-		echo "ERROR\n";
 		header("location:../html/modif_article.php?erreur=prix_erreur");
 	}
 	else
@@ -46,27 +45,23 @@ if (!empty($_POST['newname']) && !empty($_POST['name']) && !empty($_POST['descri
 				$serial = serialize($file);
 				file_put_contents("../bdd/article", $serial);
 				flock($fd, LOCK_UN);
-				echo "OK\n";
 				header("location:../html/admin_article.php");
 			}
 			else
 			{
 				flock($fd, LOCK_UN);
-				echo "ERROR\n";
 				header("location:../html/modif_article.php?erreur=name_noexiste");
 			}
 		}
 		else
 		{
 			flock($fd, LOCK_UN);
-			echo "ERROR\n";
 			header("location:../html/modif_article.php?erreur=newname_existe");
 		}
 	}
 }
 else
 {
-	echo "ERROR\n";
 	header("location:../html/modif_article.php?erreur=data_problem");
 }
 ?>

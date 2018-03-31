@@ -17,7 +17,6 @@ if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['ca
 		$data = array(array('name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>$_POST['categorie'], 'prix'=>$_POST['prix']));
 		$serial = serialize($data);
 		file_put_contents("../bdd/article", $serial);
-		echo "OK\n";
 		header("location:../html/create_article.php");
 	}
 	else
@@ -41,20 +40,17 @@ if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['ca
 			$serial = serialize($file);
 			file_put_contents("../bdd/article", $serial);
 			flock($fd, LOCK_UN);
-			echo "OK\n";
 			header("location:../html/create_article.php");
 		}
 		else{
 			flock($fd, LOCK_UN);
 			$categorie = $_POST['categorie'];
 			$_SESSION['article_ajout'] = array('name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>array($categorie), 'prix'=>$_POST['prix']);
-			echo "ERROR\n";
 			header("location:../html/create_article.php?erreur=name_existe");
 		}
 	}
 }
 else{
-	echo "ERROR\n";
 	$categorie = $_POST['categorie'];
 	$_SESSION['article_ajout'] = array('name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>array($categorie), 'prix'=>$_POST['prix']);
 

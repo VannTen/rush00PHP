@@ -37,26 +37,21 @@ if (!empty($_POST['newname']) && !empty($_POST['name']) && !empty($_POST['submit
 			$serial = serialize($file);
 			file_put_contents("../bdd/categorie", $serial);
 			flock($fd, LOCK_UN);
-			echo "OK\n";
 			header("location:../html/admin_article.php");
 		}
 		else
 		{
 			flock($fd, LOCK_UN);
-			echo "ERROR\n";
 			header("location:../html/modif_categorie.php?erreur=name_noexiste");
 		}
 	}
 	else
 	{
-		flock($fd, LOCK_UN);
-		echo "ERROR\n";
 		header("location:../html/modif_categorie.php?erreur=newname_existe");
 	}
 }
 else
 {
-	echo "ERROR\n";
 	header("location:../html/modif_categorie.php?erreur=data_problem");
 }
 ?>
