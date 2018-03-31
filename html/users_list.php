@@ -18,7 +18,8 @@ foreach ($accounts as $account)
 	$options = array(
 		'group' => array('admin', 'active', 'inactive'));
 
-	echo '<form class="tr" action="update_user.php" method="POST" >' . "\n";
+	echo '<form class="tr" method="POST" action="../php/modif_account.php'
+	.	'?redirect_url=' . $_SERVER['REQUEST_URI'] . "\">\n";
 	foreach ($account as $info => $value)
 	{
 		if (array_key_exists($info, $options))
@@ -44,7 +45,7 @@ foreach ($accounts as $account)
 			echo " />\n";
 		}
 	}
-	echo '<input class="td" name="submit" type="submit" value="OK">' . "\n";
+	echo "\n" . '<input class="td" name="submit" type="submit" value="OK">' . "\n";
 	echo "<br />\n";
 }
 

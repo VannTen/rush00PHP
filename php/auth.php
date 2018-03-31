@@ -1,5 +1,5 @@
 <?php
-include (__DIR__ . "/load_db_file");
+include (__DIR__ . "/load_db_file.php");
 function auth($login, $passwd)
 {
 	//$passwd_file = $_ENV['DATA_DIR'] . "/" . $_ENV['PASSWD_DB'];
