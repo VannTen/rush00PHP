@@ -1,13 +1,11 @@
 <?php
+include (__DIR__ . "/load_db_file");
 function auth($login, $passwd)
 {
 	//$passwd_file = $_ENV['DATA_DIR'] . "/" . $_ENV['PASSWD_DB'];
-	$passwd_file_path = "../ddb/passwd";
-	$passwd_file = fopen($passwd_file_path, "rw");
-	flock($passwd_file, LOCK_EX);
-	$accounts = unserialize(fread($passwd_file, filesize($passwd_file_path)));
+	$accounts = load_db_file("../ddb/passwd");
 	$auth_account = NULL;
-	foreach($accounts as $key => $account)
+	foreach($accounts['data'] as $key => $account)
 	{
 		if ($account['login'] == $login)
 		{
@@ -15,18 +13,14 @@ function auth($login, $passwd)
 				// rehash password if algo has changed.
 				if (password_needs_rehash($account['passwd'], PASSWORD_DEFAULT))
 				{
-					$accounts[$key]['passwd'] = password_hash($passwd, PASSWORD_DEFAULT);
-					$passwd_file = serialize($accounts);
-					fwrite($passwd_file);
-					fflush($passwd_file);
+					$accounts['data'][$key]['passwd'] = password_hash($passwd, PASSWORD_DEFAULT);
 				}
 				$auth_account = $account;
 			}
 			break ;
 		}
 	}
-	flock($passwd_file, LOCK_UN);
-	fclose($passwd_file);
+	commit_db_file($accounts);
 	return ($auth_account);
 }
 ?>
