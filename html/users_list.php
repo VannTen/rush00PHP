@@ -44,6 +44,7 @@ foreach ($accounts as $account)
 			echo " />\n";
 		}
 	}
+	echo '<input class="td" name="submit" type="submit" value="OK">' . "\n";
 	echo "<br />\n";
 }
 
