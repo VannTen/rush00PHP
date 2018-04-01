@@ -29,7 +29,7 @@ if (!empty($_SESSION["panier"]))
 <html>
 <head>
 	<link href="../css/menu.css" rel="stylesheet" media="all" type="text/css">
-	<title>Gestion du pannier</title>
+	<title>Gestion du panier</title>
 </head>
 	<body>
 		<header>
@@ -49,12 +49,12 @@ if (!empty($_SESSION["panier"]))
 		if (!empty($_SESSION["panier"]))
 			foreach ($_SESSION["panier"] as $key=>$value)
 				foreach ($file as $elt)
-					if ($elt['name'] == $key)
+					if ($elt['id'] == $key)
 					{
 						$elt['name'] = htmlspecialchars($elt['name'], ENT_QUOTES);
 						echo "<span style='color : white'> Nom : ".$elt['name']." Quantité : ".$value." Prix : ".$value * $elt['prix']."€</span>";
-						echo "<button onClick='location.href=\"panier.php?ajouter=".$elt['name']."\"'>Ajouter</button>";
-						echo "<button onClick='location.href=\"panier.php?enlever=".$elt['name']."\"'>";
+						echo "<button onClick='location.href=\"panier.php?ajouter=".$elt['id']."\"'>Ajouter</button>";
+						echo "<button onClick='location.href=\"panier.php?enlever=".$elt['id']."\"'>";
 						if ($value == 0)
 							echo "Supprimer";
 						else

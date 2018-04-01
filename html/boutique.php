@@ -26,7 +26,7 @@ if (!empty($_GET['ajouter']))
 			<ul id="menu_horizontal">
 				<li class="bouton_gauche"><a href="../index.php">Accueil</a></li>
 				<li class="bouton_gauche active"><a href="../html/boutique.php">Boutique</a></li>
-				<li class="bouton_gauche"><a href="panier.php">Panier <span style="font-size:15px; margin-top : -2000px;"><?php if ($panier_count > 0) {print $panier_count; if ($panier_count == 1) echo " produit"; else echo " produits";}?></span></a></li>
+				<li class="bouton_gauche"><a href="panier.php">Panier <span style="font-size:15px; margin-top : -2000px;"><?php if ($panier_count > 0) {print $panier_count; if ($panier_count == 1) echo " produit"; else echo " produits";} ?></span></a></li>
 				<?php include '../php/onglet_connect.php'; ?>
 			</ul>
 		</header>
@@ -44,7 +44,7 @@ if (file_exists("../bdd/article"))
 		{
 			if (in_array($elt['value'], $elt2['categorie']))
 			{
-				$elt2['name'] = htmlspecialchars($elt2['name'], ENT_QUOTES);
+				//$elt2['name'] = htmlspecialchars($elt2['name'], ENT_QUOTES);
 				$elt2['description'] = htmlspecialchars($elt2['description'], ENT_QUOTES);
 				$exist .= '<div style="display: inline-block;border-radius: 5px; padding-right: auto; width : 20%; text-align:center;
 				min-width:200px; padding-left: auto; border : 1px solid black; margin-right: 10px; line-height : 1.6;
@@ -53,7 +53,7 @@ if (file_exists("../bdd/article"))
 				$exist .= '<span style="color:black">Nom : '.$elt2['name'].' <br></span>';
 				$exist .= '<span style="color:black">Description : '.$elt2['description'].' <br></span>';
 				$exist .=  '<span style="color:black">Prix : '.$elt2['prix'].' €<br></span>';
-				$exist .=  "<button onClick='location.href=\"boutique.php?ajouter=".$elt2['name']."\"'>Ajouter produit</button><br>";
+				$exist .=  "<button onClick='location.href=\"boutique.php?ajouter="; $exist .= $elt2['id']; $exist .= "\"'>Ajouter produit</button><br>";
 				$exist .=  '</div>';
 			}
 		}

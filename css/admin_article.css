@@ -9,7 +9,7 @@
 	display:table-header-group;
 	color:white;
 	font-weight:bold;
-	background-color:blue;
+	background-color:#b48608;
 }
 .tbody
 {
@@ -23,18 +23,22 @@
 {
 	text-align: center;
 	display:table-cell;
-	border:1px solid blue;
+	border:1px solid #b48608;
 	padding:1px;
 }
 .tr.editing .td INPUT
 {
 	width:100px;
+	color:white;
 }
 
 input[type=text] {
 	width: 90%;
 	border:0;
 	text-align: center;
+	background-color:black;
+	color : white;
+	font-size : 20px;
 }
 
 .overf {
@@ -44,4 +48,9 @@ input[type=text] {
 
 .right {
 	float: right;
+}
+
+.text {
+	color:white;
+	font-size : 20px;
 }

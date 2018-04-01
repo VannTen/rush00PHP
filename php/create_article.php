@@ -16,7 +16,8 @@ if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['ca
 	}
 	elseif (!file_exists("../bdd/article"))
 	{
-		$data = array(array('name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>$_POST['categorie'], 'prix'=>$_POST['prix']));
+		$id = 1;
+		$data = array(array('id'=>$id, 'name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>$_POST['categorie'], 'prix'=>$_POST['prix']));
 		$serial = serialize($data);
 		file_put_contents("../bdd/article", $serial);
 		header("location:../html/create_article.php");
@@ -28,17 +29,17 @@ if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['ca
 		flock($fd, LOCK_EX | LOCK_SH);
 		$data = file_get_contents("../bdd/article");
 		$file = unserialize($data);
+		$id = 1;
 		foreach ($file as $elt)
 		{
 			if ($elt['name'] === $_POST['name'])
-			{
 				$exist = true;
-				break;
-			}
+			if ($elt['id'] === $id)
+				$id++;
 		}
 		if ($exist == false)
 		{
-			$file[] = array('name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>$_POST['categorie'], 'prix'=>$_POST['prix']);
+			$file[] = array('id'=>$id, 'name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>$_POST['categorie'], 'prix'=>$_POST['prix']);
 			$serial = serialize($file);
 			file_put_contents("../bdd/article", $serial);
 			flock($fd, LOCK_UN);

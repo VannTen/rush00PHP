@@ -11,12 +11,23 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 <!DOCTYPE html>
 <html>
 	<head>
+		<link href="../css/menu.css" rel="stylesheet" media="all" type="text/css">
 		<link href="../css/admin_article.css" rel="stylesheet" type="text/css">
 		<meta charset="utf-8" />
 		<title>Gestion d'article</title>
 	</head>
 	<body>
+		<header>
+			<ul id="menu_horizontal">
+				<li class="bouton_gauche"><a href="../index.php">Accueil</a></li>
+				<li class="bouton_gauche"><a href="../html/boutique.php">Boutique</a></li>
+				<li class="bouton_gauche active"><a href="panier.php">Panier <span style="font-size:15px; margin-top : -2000px;"><?php if ($panier_count > 0) {print $panier_count; if ($panier_count == 1) echo " produit"; else echo " produits";}?></span></a></li>
+				<?php include '../php/onglet_connect.php'; ?>
+			</ul>
+		</header>
+		<h1>Gestion des articles et des catégories</h1>
 	<div class="overf">
+		<h2>Liste des articles</h2>
 <?php
 	if (file_exists("../bdd/article"))
 	{
@@ -46,17 +57,17 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 				$elem['description'] = htmlspecialchars($elem['description'], ENT_QUOTES);
 
 				echo '<form class="tr" action="../php/mod_supr_art.php" method="post">';
-				echo '<div class="td">'.$elem['name'].'<input type="hidden" name="name" value="'.$elem['name'].'" /></div>';
-				echo '<div class="td">'.$elem['description'].'<input type="hidden" name="description" value="'.$elem['description'].'" /></div>';
-				echo '<div class="td">';
+				echo '<div class="td"><span class="text">'.$elem['name'].'<input type="hidden" name="name" value="'.$elem['name'].'" /></span></div>';
+				echo '<div class="td"><span class="text">'.$elem['description'].'<input type="hidden" name="description" value="'.$elem['description'].'" /></span></div>';
+				echo '<div class="td"><span class="text">';
 				$N = count($elem["categorie"]);
 				for($i=0; $i < $N; $i++)
 				{
 					$elem['categorie'][$i] = htmlspecialchars($elem['categorie'][$i], ENT_QUOTES);
 					echo($elem["categorie"][$i]."<br>");
 				}
-				echo '</div>';
-				echo '<div class="td">'.$elem['prix'].'<input type="hidden" name="prix" value="'.$elem['prix'].'" /></div>';
+				echo '</span></div>';
+				echo '<div class="td"><span class="text">'.$elem['prix'].'<input type="hidden" name="prix" value="'.$elem['prix'].'" /></span></div>';
 				echo '<div class="td action"><input type="submit" name="submit" value="Modifier"><input type="submit" name="submit" value="Supprimer"></div>';
 				echo '</form>';
 			}
@@ -69,6 +80,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 		<button onClick="location.href='create_article.php'">Ajout</button>
 
 <br>
+<br>
+<br>
+
+<h2>Liste des catégories</h2>
 <?php
 if (!empty($_GET['categorie']))
 	if ($_GET['categorie'] == "use_by_art")
@@ -89,6 +104,7 @@ if (!empty($_GET['categorie']))
 				echo '<div class="thead">';
 					echo '<div class="tr">';
 						echo '<div class="td">Name</div>';
+						echo '<div class="td">Action</div>';
 					echo '</div>';
 				echo '</div>';
 			$data = file_get_contents("../bdd/categorie");

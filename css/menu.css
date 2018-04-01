@@ -33,6 +33,16 @@ h1
 	text-align: center;
 }
 
+h2
+{
+	color: #b48608;
+	font-family: 'Droid serif', serif;
+	font-size: 30px;
+	font-weight: 400;
+	line-height: 20px;
+	margin: 0 0 12px;
+}
+
 p
 {
 	color: #eee;
