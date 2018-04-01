@@ -27,6 +27,21 @@ if (!empty($_SESSION["panier"]))
 				<p>Identifiant : <input name="login" type="text" /></p>
 				<p>Mot de passe : <input name="passwd" type="password" /></p>
 				<input name="submit" type="submit" value="OK" />
+<?php
+if (isset($_GET['account']))
+{
+	echo "<span class='error_text'>";
+	switch ($_GET['account']) {
+	case 'taken':
+		echo "Username is not available";
+		break ;
+	case 'invalid':
+		echo "Invalid parameters !\n";
+		break ;
+	}
+	echo '</span>';
+}
+?>
 			</form>
 		</div>
 		</main>

@@ -16,32 +16,34 @@ function create_account()
 {
 	//$passwd_file = $_ENV['DATA_DIR'] . "/" . $_ENV['PASSWD_DB'];
 	$passwd_file = "../bdd/passwd";
-	if (has_value('login') && has_value('passwd') && has_value('submit') && $_POST['submit'] == "OK")
+	$login = $_POST['login'];
+	$passwd = $_POST['passwd'];
+	if (file_exists($passwd_file))
 	{
-		$login = $_POST['login'];
-		$passwd = $_POST['passwd'];
-		if (file_exists($passwd_file))
-		{
-			$tab_accounts = unserialize(file_get_contents($passwd_file));
-			$account = search_account($tab_accounts, $login);
-		}
-		else
-			$account = NULL;
-		if ($account != NULL)
-			return (false);
-		else
-		{
-			$account = array('login' => $login,
-				'passwd' => password_hash($passwd, PASSWORD_DEFAULT),
-				'group' => 'active');
-			$tab_accounts[] = $account;
-			file_put_contents($passwd_file, serialize($tab_accounts));
-			return (true);
-		}
+		$tab_accounts = unserialize(file_get_contents($passwd_file));
+		$account = search_account($tab_accounts, $login);
+	}
+	else
+		$account = NULL;
+	if ($account != NULL)
+		return (false);
+	else
+	{
+		$account = array('login' => $login,
+			'passwd' => password_hash($passwd, PASSWORD_DEFAULT),
+			'group' => 'active');
+		$tab_accounts[] = $account;
+		file_put_contents($passwd_file, serialize($tab_accounts));
+		return (true);
 	}
 }
-if (create_account())
-	header("location:../index.php");
+if (has_value('login') && has_value('passwd') && has_value('submit') && $_POST['submit'] == "OK")
+{
+	if (create_account())
+		header("location:../index.php");
+	else
+		header("location: /html/create_account.php?account=taken");
+}
 else
-	header("location:../html/create_account.php");
+	header("location: /html/create_account.php?account=invalid");
 ?>
