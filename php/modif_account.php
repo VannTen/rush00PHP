@@ -1,5 +1,4 @@
 <?php
-
 /*
 * Functions defs
 */
@@ -10,8 +9,6 @@ function modif_account($login, $new_values)
 		'active' => array('passwd'),
 		'admin' => array('passwd', 'group'));
 	$account = get_account($login);
-	echo "$login\n";
-	print_r($account);
 	if ($account != NULL)
 	{
 		$account_modif = false;
@@ -50,20 +47,17 @@ function select_change_type()
 		else if (array_key_exists('current_passwd', $_POST) && auth($_SESSION['logged_on_user'], $_POST['current_passwd']))
 		{
 			// Called from user account management page
-			echo "call from_user";
 			return (modif_account($_SESSION['logged_on_user'], $_POST));
 		}
 	}
 	else
 		header('HTTP/1.0 403 Forbidden', true, 403);
 }
-
 /*
 * Pages actions
 */
-
-if (isset($_GET['redirect_url']) && $_GET['redirect_url'] == '')
-	header('location:..' . $_GET['redirect_url'], true, 303);
+if (isset($_GET['redirect_url']) && $_GET['redirect_url'] != '')
+	header('location: ' . $_GET['redirect_url']);
 session_start();
 select_change_type();
 ?>
