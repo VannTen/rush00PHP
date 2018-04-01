@@ -8,7 +8,8 @@ function modif_account($login, $new_values)
 	$can_modify = array(
 		'active' => array('passwd'),
 		'admin' => array('passwd', 'group'));
-	$account = $get_account($login);
+	$account = get_account($login);
+	echo "test";
 	if ($account != NULL)
 	{
 		$account_modif = false;
@@ -16,9 +17,15 @@ function modif_account($login, $new_values)
 		{
 			if (array_key_exists($info, $new_values))
 			{
-				if (in_array($info, $can_modify[$_SESSION['group']))
+				if (in_array($info, $can_modify[$_SESSION['group']]))
 				{
-					$account[$info] = $new_values[$info];
+					if ($info == 'passwd')
+					{
+						$account[$info] =
+					   	password_hash($new_values[$info], PASSWORD_DEFAULT);
+					}
+					else
+						$account[$info] = $new_values[$info];
 					$account_modif = true;
 				}
 			}
@@ -39,15 +46,13 @@ function select_change_type()
 		&& isset($_SESSION['logged_on_user']) && $_SESSION['logged_on_user'] != "")
 	{
 		// Called from admin modifiying some account information
-		if ($_SESSION['group'] == 'admin' && array_key_exists('login', $_POST))
+		if ($_SESSION['group'] == 'admin'
+		   	&& array_key_exists('login', $_POST))
 			return (modif_account($_POST['login'], $_POST));
-		else if (array_key_exists('passwd', $_POST) && auth($_SESSION['logged_on_user'], $_POST['passwd']))
+		else if (array_key_exists('current_passwd', $_POST)
+		   	&& auth($_SESSION['logged_on_user'], $_POST['current_passwd']))
 		{
 			// Called from user account management page
-			if (array_key_exists('new_passwd', $_POST) && $_POST['new_passwd'] == '')
-				$_POST['passwd'] = password_hash($_POST['new_passwd'], PASSWORD_DEFAULT);
-			else
-				unset($_POST['passwd']);
 			return (modif_account($_SESSION['logged_on_user'], $_POST));
 		}
 	}

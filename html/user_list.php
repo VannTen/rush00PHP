@@ -44,7 +44,7 @@ foreach ($accounts as $account)
 				echo $value;
 			echo '"';
 			if (in_array($info, $non_modifiable))
-				echo 'disabled="disabled"';
+				echo 'readonly';
 			echo " />\n";
 		}
 	}

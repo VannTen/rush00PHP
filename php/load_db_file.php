@@ -25,7 +25,6 @@ function read_db_file($path)
 }
 function commit_db_file($db)
 {
-	print_r($db);
 	$file = fopen($db['path'], 'w');
 	flock($file, LOCK_EX);
 	$data = serialize($db['data']);

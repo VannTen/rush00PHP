@@ -41,7 +41,7 @@ function commit_account($new_account)
 		$accounts = load_db_file("../bdd/passwd");
 		foreach($accounts['data'] as $key => $account)
 		{
-			if ($account['login'] == $login)
+			if ($account['login'] == $new_account['login'])
 			{
 				$accounts['data'][$key] = $new_account;
 				$result = TRUE;
