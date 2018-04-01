@@ -4,8 +4,6 @@
 	$panier_count = 0;
 	if (!empty($_SESSION["panier"]))
 		$panier_count = sizeof($_SESSION["panier"]);
-	if (!empty($_GET["suppr"]) && $_GET["suppr"] == 'true')
-		unlink('install.php');
 ?>
 
 <html>
@@ -24,9 +22,6 @@
 				<?php include 'php/onglet_connect2.php'; ?>
 			</ul>
 		</header>
-<div></div>
-<div><div><span class="text">Inscrivez vous</span></div></div>
-<div><div><span class="text">Connectez vous</span></div></div>
-<div><div><span class="text">Accédez à notre boutique</span></div></div>
+		<div style = "height:400px;background-image: url('http://thirdcertainty.com/wp-content/uploads/2017/03/sh_cell-phones_750.jpg');background-color: #cccccc; width:100%;background-size: 100% 400px;"><h1 style="font-size:5vw;line-height:100px">Bienvenue sur ce site de vente de téléphones et de tablettes</h1></div>
 	</body>
 </html>

@@ -58,7 +58,7 @@ p
 	font-size : 20px;
 }
 
-.error_text {
+.error_text, .confirm_text {
 	color:red;
 	font-size : 20px;
 }

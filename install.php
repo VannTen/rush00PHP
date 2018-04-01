@@ -67,5 +67,5 @@ $accounts = array($admin, $user);
 $db = array('data' => $accounts, 'path' => 'bdd/passwd');
 commit_db_file($db);
 unlink('install.php');
-header("location:index.php?suppr=true");
+header("location:index.php");
 ?>

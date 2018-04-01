@@ -32,9 +32,9 @@ explode('?' ,$_SERVER['REQUEST_URI'])[0] ?>" >
 <span class="text">Identifiant :</span>
 <input class="td" name="login" value="<?php echo htmlspecialchars($_SESSION['logged_on_user'])?>" disabled />
 <br /><span class="text">Ancien mot de passe :</span>
-<input class="td" name="current_passwd" value"" />
+<input type="password" class="td" name="current_passwd" value"" />
 <br /><span class="text">Nouveau mot de passe :</span>
-<input class="td" name="passwd" value="" />
+<input type="password" class="td" name="passwd" value="" />
 <br />
 <input class="td" name="submit" type="submit" value="OK">
 <br />
