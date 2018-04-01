@@ -48,41 +48,51 @@ if (!empty($_GET['categorie']))
 						echo '<div class="td">Num de commande</div>';
 						echo '<div class="td">Utilisateur</div>';
 						echo '<div class="td">Liste des articles</div>';
+						echo '<div class="td">Total</div>';
 					echo '</div>';
 				echo '</div>';
 			$data = file_get_contents("../bdd/commande");
 			$file = unserialize($data);
+			$data3 = file_get_contents("../bdd/passwd");
+			$file3 = unserialize($data3);
 			echo '<div class="tbody">';
-			foreach ($file as $elem)
-			{
-				$elem['client'] = htmlspecialchars($elem['client'], ENT_QUOTES);
-				echo '<form class="tr" action="" method="post">';
-				echo '<div class="td"><input type="text" name="name" value="'.$elem['id'].'" disabled="disabled" /><input type="hidden" name="name" value="'.$elem['id'].'" /></div>';
-				echo '<div class="td"><input type="text" name="name" value="'.$elem['client'].'" disabled="disabled" /><input type="hidden" name="name" value="'.$elem['client'].'" /></div>';
-				echo '<div class="td"><span class="text">';
-				$N = count($elem["panier"]);
-				foreach($elem["panier"] as $key=>$elem3)
+			foreach ($file3 as $elem3)
+				foreach ($file as $elem)
 				{
-					$element = '';
-					$quantity = 0;
-					$data2 = file_get_contents("../bdd/article");
-					$file2 = unserialize($data2);
-					foreach ($file2 as $elem2)
+					if ($elem['client'] == $elem3['login'])
 					{
-						if ($key == $elem2['id'])
+						$elem['client'] = htmlspecialchars($elem['client'], ENT_QUOTES);
+						echo '<form class="tr" action="" method="post">';
+						echo '<div class="td"><input type="text" name="name" value="'.$elem['id'].'" disabled="disabled" /><input type="hidden" name="name" value="'.$elem['id'].'" /></div>';
+						echo '<div class="td"><input type="text" name="name" value="'.$elem['client'].'" disabled="disabled" /><input type="hidden" name="name" value="'.$elem['client'].'" /></div>';
+						echo '<div class="td"><span class="text">';
+						foreach($elem["panier"] as $key=>$elem4)
 						{
-							$element = $elem2['name'];
-							$quantity = $elem3;
+							$element = '';
+							$value = 0;
+							$quantity = 0;
+							$data2 = file_get_contents("../bdd/article");
+							$file2 = unserialize($data2);
+							foreach ($file2 as $elem2)
+							{
+								if ($key == $elem2['id'])
+								{
+									$element = $elem2['name'];
+									$quantity = $elem4;
+								}
+								$value += $elem2['prix'] * $elem4;
+							}
+							$element = htmlspecialchars($element, ENT_QUOTES);
+							echo $quantity.' '.$element."<br>";
 						}
+
+						echo '</span></div>';
+						echo '<div class="td"><input type="text" name="valeur" value="'.$value.' €" disabled="disabled" /><input type="hidden" name="valeur" value="'.$value.'" /></div>';
+						echo '</form>';
 					}
-					$element = htmlspecialchars($element, ENT_QUOTES);
-					echo $quantity.' '.$element."<br>";
 				}
-				echo '</span></div>';
-				echo '</form>';
-			}
-				echo '</div>';
 			echo '</div>';
+		echo '</div>';
 		}
 	}
 ?>

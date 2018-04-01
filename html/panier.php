@@ -44,10 +44,13 @@ if (!empty($_SESSION["panier"]))
 		<h1>Mon panier</h1>
 
 <?php
-	$data = file_get_contents("../bdd/article");
-	$file = unserialize($data);
-	//afficher le contenu de la session
+	if (file_exists("../bdd/article"))
+	{
+		$data = file_get_contents("../bdd/article");
+		$file = unserialize($data);
+		//afficher le contenu de la session
 		if (!empty($_SESSION["panier"]))
+		{
 		echo '<table style="width:50%">';
 			echo '<thead>';
 				echo '<tr>';
@@ -81,7 +84,9 @@ if (!empty($_SESSION["panier"]))
 						echo '<td style="background-color: #b48608;"><span style="background-color: #b48608;color:white">'.$val.' €</td>';
 					echo '</tr>';
 			echo '</tbody>';
-		echo '</table>'
+		echo '</table>';
+	}
+	}
 ?>
 <div style="width:100%">
 		<button onClick='location.href="panier.php?vider=1"'>Vider le panier</button>

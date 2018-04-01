@@ -4,6 +4,8 @@
 	$panier_count = 0;
 	if (!empty($_SESSION["panier"]))
 		$panier_count = sizeof($_SESSION["panier"]);
+	if (!empty($_GET["suppr"]) && $_GET["suppr"] == 'true')
+		unlink('install.php');
 ?>
 
 <html>

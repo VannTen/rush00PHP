@@ -79,7 +79,6 @@ foreach ($accounts as $account)
 	}
 	echo '<div class="td"><input class="td" name="submit" type="submit" value="OK"></div>';
 	echo '</form>';
-	//echo "<br />\n";
 }
 	if (isset($_GET['modif']))
 	{
@@ -97,17 +96,7 @@ echo '<span>';
 	}
 echo '</div>';
 echo '</div>';
-/*
-disabled="disabled" />'
-	. '<input class="td"name="password" type="text" >'
-	. '<select class="td"name="group">'
-	. '<option value="admin" selected>Admin</option>'
-	. '<option value="active" selected>Active</option>'
-	. '</select>'
-	. '<input class="td" name="submit" type="submit" value="OK">'
-}
-}
-*/
+
 ?>
 	</body>
 	</html>
