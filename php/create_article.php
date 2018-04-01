@@ -35,10 +35,13 @@ if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['ca
 		{
 			if ($elt['name'] === $_POST['name'])
 				$exist = true;
-			if ($elt['id'] === $id)
-				$id = $id_max++;
 			if ($elt['id'] > $id_max)
 				$id_max = $elt['id'];
+			if ($elt['id'] === $id)
+			{
+				$id = $id_max + 1;
+				$id_max++;
+			}
 		}
 		if ($exist == false)
 		{

@@ -33,29 +33,27 @@ if (!empty($_SESSION["panier"]) && !empty($_SESSION["logged_on_user"]) && !empty
 	}
 	else
 	{
-		$exist = false;
 		$fd = fopen("../bdd/commande", "c+");
 		flock($fd, LOCK_EX | LOCK_SH);
 		$data = file_get_contents("../bdd/commande");
 		$file = unserialize($data);
-		$id = 1;
+		$id = 2;
+		$id_max = 2;
 		foreach ($file as $elt)
 		{
+			if ($elt['id'] > $id_max)
+				$id_max = $elt['id'];
 			if ($elt['id'] === $id)
-				$id++;
+			{
+				$id = $id_max + 1;
+				$id_max++;
+			}
 		}
-		if ($exist == false)
-		{
-			$file[] = array('id'=>$id, 'client'=>$_SESSION["logged_on_user"], 'panier'=>$_SESSION["panier"]);
-			$serial = serialize($file);
-			file_put_contents("../bdd/commande", $serial);
-			flock($fd, LOCK_UN);
-			echo "<p>Votre commande à bien été enregistrée.</p>";
-		}
-		else{
-			flock($fd, LOCK_UN);
-			echo "<p>Une erreur a été rencontrée</p>";
-		}
+		$file[] = array('id'=>$id, 'client'=>$_SESSION["logged_on_user"], 'panier'=>$_SESSION["panier"]);
+		$serial = serialize($file);
+		file_put_contents("../bdd/commande", $serial);
+		flock($fd, LOCK_UN);
+		echo "<p>Votre commande à bien été enregistrée.</p>";
 	}
 }
 else{

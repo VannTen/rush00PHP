@@ -1,9 +1,5 @@
 <?php
 	session_start();
-	$_SESSION['article_ajout'] = "";
-	$_SESSION['article_modif'] = "";
-	$_SESSION['categorie_modif'] = "";
-	$_SESSION['categorie_ajout'] = "";
 if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 	{
 
@@ -14,7 +10,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 		<link href="../css/menu.css" rel="stylesheet" media="all" type="text/css">
 		<link href="../css/admin_article.css" rel="stylesheet" type="text/css">
 		<meta charset="utf-8" />
-		<title>Gestion d'article</title>
+		<title>Panel Administration</title>
 	</head>
 	<body>
 		<header>
@@ -27,7 +23,6 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 			</ul>
 		</header>
 		<h1>Panel administrateur</h1>
-	<div class="overf">
 <h2>Liste des commandes réalisées sur le site</h2>
 <?php
 if (!empty($_GET['categorie']))
@@ -38,29 +33,50 @@ if (!empty($_GET['categorie']))
 <?php
 	if (file_exists("../bdd/commande"))
 	{
-		$data = file_get_contents("../bdd/categorie");
+		$data = file_get_contents("../bdd/commande");
 		$file = unserialize($data);
 		$exist = false;
 		foreach ($file as $elt)
-				$exist = true;
+			$exist = true;
 		if ($exist == true)
 		{
 			echo '<div class="table2">';
 				echo '<div class="thead">';
 					echo '<div class="tr">';
-						echo '<div class="td">Name</div>';
-						echo '<div class="td">Action</div>';
+						echo '<div class="td">Num de commande</div>';
+						echo '<div class="td">Utilisateur</div>';
+						echo '<div class="td">Liste des articles</div>';
 					echo '</div>';
 				echo '</div>';
-			$data = file_get_contents("../bdd/categorie");
+			$data = file_get_contents("../bdd/commande");
 			$file = unserialize($data);
 			echo '<div class="tbody">';
 			foreach ($file as $elem)
 			{
-				$elem['name'] = htmlspecialchars($elem['name'], ENT_QUOTES);
-				echo '<form class="tr" action="../php/mod_supr_cat.php" method="post">';
-				echo '<div class="td"><input type="text" name="name" value="'.$elem['name'].'" disabled="disabled" /><input type="hidden" name="name" value="'.$elem['name'].'" /></div>';
-				echo '<div class="td action"><input type="submit" name="submit" value="Modifier"><input type="submit" name="submit" value="Supprimer"></div>';
+				$elem['client'] = htmlspecialchars($elem['client'], ENT_QUOTES);
+				echo '<form class="tr" action="" method="post">';
+				echo '<div class="td"><input type="text" name="name" value="'.$elem['id'].'" disabled="disabled" /><input type="hidden" name="name" value="'.$elem['id'].'" /></div>';
+				echo '<div class="td"><input type="text" name="name" value="'.$elem['client'].'" disabled="disabled" /><input type="hidden" name="name" value="'.$elem['client'].'" /></div>';
+				echo '<div class="td"><span class="text">';
+				$N = count($elem["panier"]);
+				foreach($elem["panier"] as $key=>$elem3)
+				{
+					$element = '';
+					$quantity = 0;
+					$data2 = file_get_contents("../bdd/article");
+					$file2 = unserialize($data2);
+					foreach ($file2 as $elem2)
+					{
+						if ($key == $elem2['id'])
+						{
+							$element = $elem2['name'];
+							$quantity = $elem3;
+						}
+					}
+					$element = htmlspecialchars($element, ENT_QUOTES);
+					echo $quantity.' '.$element."<br>";
+				}
+				echo '</span></div>';
 				echo '</form>';
 			}
 				echo '</div>';
@@ -68,7 +84,6 @@ if (!empty($_GET['categorie']))
 		}
 	}
 ?>
-</div>
 		<button onClick="location.href='user_list.php'">Accès a la liste des utilisateurs</button>
 		<button onClick="location.href='boutique.php'">Accès a la boutique</button>
 
