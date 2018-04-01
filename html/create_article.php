@@ -8,6 +8,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 		$description = $_SESSION['article_ajout']['description'];
 		$categorie = $_SESSION['article_ajout']['categorie'][0];
 		$prix = $_SESSION['article_ajout']['prix'];
+		$image = $_SESSION['article_ajout']['image'];
 	}
 	else
 	{
@@ -15,6 +16,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 		$description = "";
 		$categorie = "";
 		$prix = "";
+		$image = "";
 	}
 ?>
 <html><body>
@@ -47,6 +49,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 	</select>
 	<br />
 	Prix: <input type="text" name="prix" value="<?php echo $prix; ?>" required />
+	<br />
+	Image: <input type="text" name="image" value="<?php echo $image; ?>" required />
 	<br />
 	<input type="submit" name="submit" value="OK" />
 	<br />

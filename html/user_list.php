@@ -25,22 +25,23 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 <?php
 include ('../php/load_db_file.php');
 $accounts = read_db_file('../bdd/passwd');
+echo '<div class="table">';
+	echo '<div class="thead">';
+		echo '<div class="tr">';
+			echo '<div class="td">Nom</div>';
+			echo '<div class="td">Mot de passe</div>';
+			echo '<div class="td">Catégorie</div>';
+			echo '<div class="td">Action</div>';
+		echo '</div>';
+	echo '</div>';
+echo '<div class="tbody">';
 foreach ($accounts as $account)
 {
 	$non_modifiable= array('login');
 	$dont_display= array('passwd');
 	$options = array(
 		'group' => array('admin', 'active', 'inactive'));
-	echo '<div class="table">';
-		echo '<div class="thead">';
-			echo '<div class="tr">';
-				echo '<div class="td">Nom</div>';
-				echo '<div class="td">Mot de passe</div>';
-				echo '<div class="td">Catégorie</div>';
-				echo '<div class="td">Action</div>';
-			echo '</div>';
-		echo '</div>';
-	echo '<div class="tbody">';
+
 	echo '<form class="tr" method="POST" action="../php/modif_account.php'
 	.	'?redirect_url=' . $_SERVER['REQUEST_URI'] . "\">";
 	foreach ($account as $info => $value)
@@ -74,10 +75,11 @@ foreach ($accounts as $account)
 		}
 	}
 	echo '<div class="td"><input class="td" name="submit" type="submit" value="OK"></div>';
+	echo '</form>';
 	//echo "<br />\n";
-	echo '</div>';
-echo '</div>';
 }
+echo '</div>';
+echo '</div>';
 /*
 disabled="disabled" />'
 	. '<input class="td"name="password" type="text" >'
@@ -90,8 +92,6 @@ disabled="disabled" />'
 }
 */
 ?>
-	</form>
-	</div>
 	</body>
 	</html>
 <?php
