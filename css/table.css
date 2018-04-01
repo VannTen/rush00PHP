@@ -4,7 +4,7 @@ table
 	width: 99%;
 	border-collapse:collapse;
 }
-thead
+thead, tfoot
 {
 	display:table-header-group;
 	color:white;

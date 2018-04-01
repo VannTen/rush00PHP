@@ -58,10 +58,23 @@ if (file_exists("../bdd/article"))
 			{
 				//$elt2['name'] = htmlspecialchars($elt2['name'], ENT_QUOTES);
 				$elt2['description'] = htmlspecialchars($elt2['description'], ENT_QUOTES);
-				$exist .= '<div style="display: inline-block; border-radius: 5px; padding-right: auto; width : 20%; min-width:200px; text-align:center; padding-left: auto; border : 1px solid black; margin-right: 10px; line-height : 1.6; background-color:FloralWhite;">';
+				$exist .= '<div style="	display: inline-block;
+										border-radius: 5px;
+										max-height : 10%;
+										height : 10%;
+										padding-right: auto;
+										width : 10%;
+										min-width:200px;
+										text-align:center;
+										padding-left: auto;
+										border : 1px solid black;
+										margin-right: 10px;
+										line-height : 1.6;
+										background-color:FloralWhite;">';
 
 				$exist .= '<span style="color:black">Nom : '.$elt2['name'].' <br></span>';
-				if ($elt2['image'] != 'none') $exist .= '<span><img src="'.$elt2['image'].'" style="heigth : 40%; width : 40%"> <br></span>';
+				if ($elt2['image'] != 'none')
+					$exist .= '<span><img src="'.$elt2['image'].'"onerror="this.onerror=null;this.src=\'http://dentaireservices77.com/wp-content/uploads/2016/09/Image-non-disponible.png\';" style="heigth : 40%; width : 40%;"> <br></span>';
 				$exist .= '<span style="color:black">Description : '.$elt2['description'].' <br></span>';
 				$exist .=  '<span style="color:black">Prix : '.$elt2['prix'].' €<br></span>';
 				$exist .=  "<button onClick='location.href=\"boutique.php?ajouter="; $exist .= $elt2['id']; $exist .= "\"'>Ajouter produit</button><br>";

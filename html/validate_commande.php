@@ -1,5 +1,8 @@
 <?php
 session_start();
+$panier_count = 0;
+if (!empty($_SESSION["panier"]))
+	$panier_count = sizeof($_SESSION["panier"]);
 ?>
 <html>
 	<head>

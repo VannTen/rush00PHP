@@ -56,13 +56,18 @@ if (!empty($_SESSION["panier"]))
 					echo '<th>Prix</th>';
 				echo '</tr>';
 			echo '</thead>';
+			$val = 0;
+			foreach ($_SESSION["panier"] as $key=>$value)
+				foreach ($file as $elt)
+					if ($elt['id'] == $key)
+						$val += $value * $elt['prix'];
 			echo '<tbody>';
 			foreach ($_SESSION["panier"] as $key=>$value)
 				foreach ($file as $elt)
 					if ($elt['id'] == $key)
 					{
 						$elt['name'] = htmlspecialchars($elt['name'], ENT_QUOTES);
-						echo "<tr><td><span class='text'>".$elt['name']."</span></td><td><span class='text'>".$value."</span></td><td><span class='text'>".$value * $elt['prix']."€</span></td>";
+						echo "<tr><td><span class='text'>".$elt['name']."</span></td><td><span class='text'>".$value."</span></td><td><span class='text'>".$value * $elt['prix']." €</span></td>";
 						echo "<td style='width:20%'><button onClick='location.href=\"panier.php?ajouter=".$elt['id']."\"'>Ajouter</button>";
 						echo "<button onClick='location.href=\"panier.php?enlever=".$elt['id']."\"'>";
 						if ($value == 0)
@@ -71,6 +76,10 @@ if (!empty($_SESSION["panier"]))
 							echo "Enlever";
 						echo "</button></td></tr>";
 					}
+					echo '<tr>';
+					echo '<td colspan="2"></td>';
+						echo '<td style="background-color: #b48608;"><span style="background-color: #b48608;color:white">'.$val.' €</td>';
+					echo '</tr>';
 			echo '</tbody>';
 		echo '</table>'
 ?>
