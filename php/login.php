@@ -23,16 +23,16 @@ if (array_key_exists('login', $_POST)
 	&& isset($_SESSION))
 {
 	if (session_login($_POST['login'], $_POST['passwd']))
-		header("Location: /index.php?login=success");
+		header("Location: ../index.php?login=success");
 	else
 	{
-		header("Location: /html/login.php?login=bad");
+		header("Location: ../html/login.php?login=bad");
 	}
 }
 else
 {
 	$_SESSION['logged_on_user'] = "";
 	$_SESSION['group'] = "";
-	header("Location: /html/login.php?login=invalid");
+	header("Location: ../html/login.php?login=invalid");
 }
 ?>

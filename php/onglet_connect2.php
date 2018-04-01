@@ -7,13 +7,13 @@
 {
 ?>
 		<li class="bouton_droite">
-			<a href="./html/admin_article.php"><?php echo "Bonjour ".$_SESSION['logged_on_user']; ?></a>
+			<a href="./html/admin_panel.php"><?php echo "Bonjour ".$_SESSION['logged_on_user']; ?></a>
 		</li>
 <?php
 } else {
 ?>
 	<li class="bouton_droite">
-		<a href=""><?php echo "Bonjour ".$_SESSION['logged_on_user']; ?></a>
+		<a href="./html/profile.php"><?php echo "Bonjour ".$_SESSION['logged_on_user']; ?></a>
 	</li>
 
 <?php

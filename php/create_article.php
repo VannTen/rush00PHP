@@ -10,14 +10,14 @@ if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['ca
 	if (!preg_match_all("/^[0-9]+$/", $_POST['prix']))
 	{
 		$categorie = $_POST['categorie'];
-		$_SESSION['article_ajout'] = array('name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>array($categorie), 'prix'=>$_POST['prix']);
+		$_SESSION['article_ajout'] = array('name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>array($categorie), 'prix'=>$_POST['prix'], 'status'=>'visible');
 		echo "ERROR\n";
 		header("location:../html/create_article.php?erreur=prix_erreur");
 	}
 	elseif (!file_exists("../bdd/article"))
 	{
 		$id = 1;
-		$data = array(array('id'=>$id, 'name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>$_POST['categorie'], 'prix'=>$_POST['prix']));
+		$data = array(array('id'=>$id, 'name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>$_POST['categorie'], 'prix'=>$_POST['prix'], 'status'=>'visible'));
 		$serial = serialize($data);
 		file_put_contents("../bdd/article", $serial);
 		header("location:../html/create_article.php");
@@ -45,7 +45,7 @@ if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['ca
 		}
 		if ($exist == false)
 		{
-			$file[] = array('id'=>$id, 'name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>$_POST['categorie'], 'prix'=>$_POST['prix']);
+			$file[] = array('id'=>$id, 'name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>$_POST['categorie'], 'prix'=>$_POST['prix'], 'status'=>'visible');
 			$serial = serialize($file);
 			file_put_contents("../bdd/article", $serial);
 			flock($fd, LOCK_UN);

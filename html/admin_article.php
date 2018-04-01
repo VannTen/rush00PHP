@@ -46,6 +46,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 						echo '<div class="td">Description</div>';
 						echo '<div class="td">Categorie</div>';
 						echo '<div class="td">Prix</div>';
+						echo '<div class="td">Status</div>';
 						echo '<div class="td">Action</div>';
 					echo '</div>';
 				echo '</div>';
@@ -69,6 +70,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 				}
 				echo '</span></div>';
 				echo '<div class="td"><span class="text">'.$elem['prix'].'<input type="hidden" name="prix" value="'.$elem['prix'].'" /></span></div>';
+				echo '<div class="td"><span class="text">'.$elem['status'].'<input type="hidden" name="status" value="'.$elem['status'].'" /></span></div>';
 				echo '<div class="td action"><input type="submit" name="submit" value="Modifier"><input type="submit" name="submit" value="Supprimer"></div>';
 				echo '</form>';
 			}

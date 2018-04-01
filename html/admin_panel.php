@@ -84,7 +84,9 @@ if (!empty($_GET['categorie']))
 		}
 	}
 ?>
+</div>
 		<button onClick="location.href='user_list.php'">Accès a la liste des utilisateurs</button>
+		<button onClick="location.href='admin_article.php'">Accès a la liste des produits</button>
 		<button onClick="location.href='boutique.php'">Accès a la boutique</button>
 
 	</body>

@@ -2,11 +2,23 @@
 session_start();
 if (!empty($_GET['ajouter']))
 {
+	$valid = false;
+	$data = file_get_contents("../bdd/article");
+	$file = unserialize($data);
+		//afficher le contenu de la session
+	if (!empty($_GET["ajouter"]))
+		foreach ($file as $elt)
+			if ($elt['id'] == $_GET["ajouter"])
+			{
+				$valid = true;
+				break;
+			}
 	if (!isset($_SESSION["panier"]))
 		$_SESSION["panier"] = array();
-	if (!isset($_SESSION["panier"][$_GET["ajouter"]]))
+	if (!isset($_SESSION["panier"][$_GET["ajouter"]]) && $valid == true)
 		$_SESSION["panier"][$_GET["ajouter"]] = 0;
-	$_SESSION["panier"][$_GET["ajouter"]] = ($_SESSION["panier"][$_GET["ajouter"]]) + 1;
+	if (!empty($_GET["ajouter"]) && $valid == true)
+		$_SESSION["panier"][$_GET["ajouter"]] = ($_SESSION["panier"][$_GET["ajouter"]]) + 1;
 	header("location:../html/boutique.php");
 }
 
@@ -42,7 +54,7 @@ if (file_exists("../bdd/article"))
 		$exist = "";
 		foreach ($file2 as $elt2)
 		{
-			if (in_array($elt['value'], $elt2['categorie']))
+			if (in_array($elt['value'], $elt2['categorie']) && $elt2['status'] == 'visible')
 			{
 				//$elt2['name'] = htmlspecialchars($elt2['name'], ENT_QUOTES);
 				$elt2['description'] = htmlspecialchars($elt2['description'], ENT_QUOTES);
