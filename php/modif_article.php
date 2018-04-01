@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
+{
 if (!empty($_POST['newname']) && !empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['categorie']) && !empty($_POST['prix']) && !empty($_POST['submit']))
 {
 	if (!preg_match_all("/^[0-9]+$/", $_POST['prix']))
@@ -63,5 +65,8 @@ if (!empty($_POST['newname']) && !empty($_POST['name']) && !empty($_POST['descri
 else
 {
 	header("location:../html/modif_article.php?erreur=data_problem");
+}
+}else {
+	header("location:../index.php");
 }
 ?>

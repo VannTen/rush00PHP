@@ -1,6 +1,7 @@
 <?php
 	session_start();
-
+if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
+	{
 	if (!empty($_SESSION['categorie_ajout']))
 		$name = $_SESSION['categorie_ajout']['name'];
 	else
@@ -22,3 +23,8 @@
 	<button onClick="location.href='admin_article.php'">Retour vers la page d'administration</button>
 </form>
 </body></html>
+<?php
+}else {
+	header("location:../index.php");
+}
+?>

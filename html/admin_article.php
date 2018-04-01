@@ -4,8 +4,8 @@
 	$_SESSION['article_modif'] = "";
 	$_SESSION['categorie_modif'] = "";
 	$_SESSION['categorie_ajout'] = "";
-//	if (isset($_SESSION['login']) && isset($_SESSION['groupe']) && $_SESSION['login'] != "" && $_SESSION['group'] != "Admin")
-//	{
+if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
+	{
 
 ?>
 <!DOCTYPE html>
@@ -102,12 +102,13 @@ if (!empty($_GET['categorie']))
 ?>
 </div>
 		<button onClick="location.href='create_categorie.php'">Ajout</button><br>
+		<button onClick="location.href='user_list.php'">Accès a la liste des utilisateurs</button>
 		<button onClick="location.href='boutique.php'">Accès a la boutique</button>
 
 	</body>
 </html>
 <?php
-//}else {
-//	header("location:http://www.example.com/");
-//}
+}else {
+	header("location:../index.php");
+}
 ?>

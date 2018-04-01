@@ -3,6 +3,8 @@ session_start();
 
 $_SESSION['categorie_ajout'] = "";
 $_SESSION['categorie_modif'] = "";
+if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
+{
 if (!empty($_POST['name']) && !empty($_POST['submit']))
 {
 	if (!file_exists("../bdd/categorie"))
@@ -44,5 +46,8 @@ if (!empty($_POST['name']) && !empty($_POST['submit']))
 }
 else{
 	header("location:../html/create_categorie.php?erreur=data_problem");
+}
+}else {
+	header("location:../index.php");
 }
 ?>

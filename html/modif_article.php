@@ -1,5 +1,7 @@
 <?php
 session_start();
+if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
+{
 if (!empty($_SESSION['article_modif']))
 {
 	$name = $_SESSION['article_modif']['name'];
@@ -50,3 +52,8 @@ if (!empty($_GET['erreur']))
 	<input type="submit" name="submit" value="OK" />
 </form>
 </body></html>
+<?php
+}else {
+	header("location:../index.php");
+}
+?>

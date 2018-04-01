@@ -35,8 +35,8 @@ if (!empty($_SESSION["panier"]))
 		<header>
 			<ul id="menu_horizontal">
 				<li class="bouton_gauche"><a href="../index.php">Accueil</a></li>
-				<li class="bouton_gauche"><a href="../html/boutique.php">Shop</a></li>
-				<li class="bouton_gauche"><a href="panier.php">Panier <span style="font-size:15px; margin-top : -2000px;"><?php if ($panier_count > 0) {print $panier_count; if ($panier_count == 1) echo " produit"; else echo " produits";}?></span></a></li>
+				<li class="bouton_gauche"><a href="../html/boutique.php">Boutique</a></li>
+				<li class="bouton_gauche active"><a href="panier.php">Panier <span style="font-size:15px; margin-top : -2000px;"><?php if ($panier_count > 0) {print $panier_count; if ($panier_count == 1) echo " produit"; else echo " produits";}?></span></a></li>
 				<?php include '../php/onglet_connect.php'; ?>
 			</ul>
 		</header>
@@ -63,7 +63,35 @@ if (!empty($_SESSION["panier"]))
 ?>
 <div style="width:100%">
 		<button onClick='location.href="panier.php?vider=1"'>Vider le panier</button>
-		<button onClick="<?php if (!empty($_SESSION['login'])) echo 'location.href=\'validate_commande.php\''; else echo 'alert(\'Vous devez etre connecté pour finaliser votre commande\')'; ?>">Valider votre commande</button>
+		<button onClick="
+		<?php
+		if (!empty($_SESSION['logged_on_user']))
+		{
+			if ($panier_count > 0)
+			{
+				$exist = false;
+				foreach ($_SESSION["panier"] as $key=>$value)
+					foreach ($file as $elt)
+						if ($value > 0)
+						{
+							$exist = true;
+							break;
+						}
+				if ($exist == true)
+					echo 'location.href=\'validate_commande.php\'';
+				else
+					echo 'alert(\'Votre panier est vide\')';
+			}
+			else
+				echo 'alert(\'Votre panier est vide\')';
+		}
+		else
+		?>
+			echo 'alert(\'Vous devez etre connecté pour finaliser votre commande\')';
+		<?php
+	}
+	?>
+		">Valider votre commande</button>
 		<button onClick='location.href="boutique.php"'>Continuez vos achats</button>
 </div>
 	</body>

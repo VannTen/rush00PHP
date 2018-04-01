@@ -1,7 +1,7 @@
 <?php
 session_start();
-
-print_r($_POST);
+if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
+{
 if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['prix']) && !empty($_POST['submit']))
 {
 	$exist = false;
@@ -38,5 +38,8 @@ if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['pr
 			header("location:../html/admin_article.php");
 		}
 	}
+}
+}else {
+	header("location:../index.php");
 }
 ?>

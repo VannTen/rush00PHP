@@ -25,16 +25,11 @@ if (!empty($_GET['ajouter']))
 		<header>
 			<ul id="menu_horizontal">
 				<li class="bouton_gauche"><a href="../index.php">Accueil</a></li>
-				<li class="bouton_gauche active"><a href="../html/boutique.php">Shop</a></li>
+				<li class="bouton_gauche active"><a href="../html/boutique.php">Boutique</a></li>
 				<li class="bouton_gauche"><a href="panier.php">Panier <span style="font-size:15px; margin-top : -2000px;"><?php if ($panier_count > 0) {print $panier_count; if ($panier_count == 1) echo " produit"; else echo " produits";}?></span></a></li>
 				<?php include '../php/onglet_connect.php'; ?>
 			</ul>
 		</header>
-<a href="admin_article.php">Accès a la page de gestion de produit</a><br>
-<br>
-<br>
-<br>
-
 <?php
 if (file_exists("../bdd/article"))
 {

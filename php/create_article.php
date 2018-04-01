@@ -3,6 +3,8 @@ session_start();
 
 $_SESSION['article_ajout'] = "";
 $_SESSION['article_modif'] = "";
+if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
+{
 if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['categorie']) && !empty($_POST['prix']) && !empty($_POST['submit']))
 {
 	if (!preg_match_all("/^[0-9]+$/", $_POST['prix']))
@@ -55,5 +57,8 @@ else{
 	$_SESSION['article_ajout'] = array('name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>array($categorie), 'prix'=>$_POST['prix']);
 
 	header("location:../html/create_article.php?erreur=data_problem");
+}
+}else {
+	header("location:../index.php");
 }
 ?>

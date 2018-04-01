@@ -1,17 +1,21 @@
 <?php
 
-	if(isset($_SESSION['logged_on_user']))
+	if(!empty($_SESSION['logged_on_user']))
 	{
 ?>
-		<li class="bouton_droite">
-			<a href=""><?php echo "Bonjour ".$_SESSION['logged_on_user']; ?></a>
-		</li>
 <?php if(isset($_SESSION['group']) && $_SESSION['group'] == 'admin')
 {
 ?>
 		<li class="bouton_droite">
 			<a href="../html/admin_article.php"><?php echo "Bonjour ".$_SESSION['logged_on_user']; ?></a>
 		</li>
+<?php
+}else {
+?>
+
+<li class="bouton_droite">
+	<a href=""><?php echo "Bonjour ".$_SESSION['logged_on_user']; ?></a>
+</li>
 <?php
 }
 ?>
@@ -24,7 +28,7 @@
 	{
 ?>
 		<li class="bouton_droite">
-			<a href="../html/login.html">Connexion</a>
+			<a href="../html/login.php">Connexion</a>
 		</li>
 <?php
 	}

@@ -43,5 +43,5 @@ function create_account()
 if (create_account())
 	header("location:../index.php");
 else
-	header("location:../html/create_account.html");
+	header("location:../html/create_account.php");
 ?>

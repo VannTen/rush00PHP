@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
+{
 if (!empty($_POST['newname']) && !empty($_POST['name']) && !empty($_POST['submit']))
 {
 	$exist = false;
@@ -53,5 +55,8 @@ if (!empty($_POST['newname']) && !empty($_POST['name']) && !empty($_POST['submit
 else
 {
 	header("location:../html/modif_categorie.php?erreur=data_problem");
+}
+else {
+	header("location:../index.php");
 }
 ?>

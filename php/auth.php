@@ -1,4 +1,3 @@
-
 <?php
 include (__DIR__ . "/load_db_file.php");
 function auth($login, $passwd)
@@ -23,5 +22,31 @@ function auth($login, $passwd)
 	}
 	commit_db_file($accounts);
 	return ($auth_account);
+}
+function get_account($login)
+{
+	$accounts = read_db_file("../bdd/passwd");
+	foreach($accounts as $account)
+	{
+		if ($account['login'] == $login);
+		return ($account);
+	}
+	return (NULL);
+}
+function commit_account($new_account)
+{
+	$result = FALSE;
+	$accounts = load_db_file("../bdd/passwd");
+	foreach($accounts['data'] as $key => $account)
+	{
+		if ($account['login'] == $login)
+		{
+			$accounts['data'][$key] = $account;
+			$result = TRUE;
+			break ;
+		}
+	}
+	commit_db_file($accounts);
+	return ($result);
 }
 ?>

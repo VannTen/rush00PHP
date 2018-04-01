@@ -25,8 +25,14 @@ if (array_key_exists('login', $_POST)
 	if (session_login($_POST['login'], $_POST['passwd']))
 		header("location:../index.php");
 	else
-		header("location:../html/login.html");
+	{
+		header("location:../html/login.php");
+	}
 }
 else
-	header("location:../html/login.html");
+{
+	$_SESSION['logged_on_user'] = "";
+	$_SESSION['group'] = "";
+	header("location:../html/login.php");
+}
 ?>
