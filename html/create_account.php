@@ -20,7 +20,7 @@
 			<form  class="user_info_boxes" action="../php/create_account.php" method="POST">
 				<p>Identifiant : <input name="login" type="text" /></p>
 				<p>Mot de passe : <input name="passwd" type="password" /></p>
-				<input name="submit" type="submit" value="Création du compte" />
+				<input name="submit" type="submit" value="OK" />
 			</form>
 		</div>
 		</main>

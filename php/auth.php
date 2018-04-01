@@ -36,15 +36,24 @@ function get_account($login)
 function commit_account($new_account)
 {
 	$result = FALSE;
-	$accounts = load_db_file("../bdd/passwd");
-	foreach($accounts['data'] as $key => $account)
+	if (file_exists("../bdd/passwd"))
 	{
-		if ($account['login'] == $login)
+		$accounts = load_db_file("../bdd/passwd");
+		foreach($accounts['data'] as $key => $account)
 		{
-			$accounts['data'][$key] = $account;
-			$result = TRUE;
-			break ;
+			if ($account['login'] == $login)
+			{
+				$accounts['data'][$key] = $new_account;
+				$result = TRUE;
+				break ;
+			}
 		}
+	}
+	else
+	{
+		$accounts = array(
+			'path' => "../bdd/passwd",
+			'data' => array($new_account));
 	}
 	commit_db_file($accounts);
 	return ($result);
