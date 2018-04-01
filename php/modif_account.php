@@ -19,7 +19,7 @@ function modif_account($login, $new_values)
 			{
 				if (in_array($info, $can_modify[$_SESSION['group']])
 					&& !(in_array($info, $cannot_be_empty)
-						&& $new_values[$info] == ''))
+					&& $new_values[$info] == ''))
 				{
 					if ($info == 'passwd')
 					{
@@ -35,8 +35,7 @@ function modif_account($login, $new_values)
 		if ($account_modif)
 			commit_account($account);
 	}
-	else
-		return ($modif_account);
+	return ($account_modif);
 }
 // Page can be called by admin (from users_list.php) or by user (from his/her profile page)
 function select_change_type()
@@ -53,14 +52,19 @@ function select_change_type()
 			return (modif_account($_SESSION['logged_on_user'], $_POST));
 		}
 	}
-	else
-		header('HTTP/1.0 403 Forbidden', true, 403);
+	header('HTTP/1.0 403 Forbidden', true, 403);
+	return (false);
 }
 /*
 * Pages actions
 */
-if (isset($_GET['redirect_url']) && $_GET['redirect_url'] != '')
-	header('location: ' . $_GET['redirect_url']);
 session_start();
-select_change_type();
+if (select_change_type())
+	$modif = 'ok';
+else
+	$modif = 'fail';
+if (isset($_GET['redirect_url']) && $_GET['redirect_url'] != '')
+	header('location: ' . $_GET['redirect_url'] . '?modif=' . $modif);
+else
+	header('location: /index.php?modif=' . $modif);
 ?>
