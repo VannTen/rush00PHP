@@ -6,12 +6,22 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 <!DOCTYPE html>
 <html>
 	<head>
+		<link href="../css/menu.css" rel="stylesheet" media="all" type="text/css">
+		<link href="../css/admin_article.css" rel="stylesheet" type="text/css">
 		<title>Liste utilisateur</title>
-		<link rel="stylesheet" type="text/css" href="global.css" />
 	</head>
 	<body>
-		<div class="table" name="list">
-			<div class="th"></div>
+		<header>
+			<ul id="menu_horizontal">
+				<li class="bouton_gauche"><a href="../index.php">Accueil</a></li>
+				<li class="bouton_gauche"><a href="../html/boutique.php">Boutique</a></li>
+				<li class="bouton_gauche"><a href="panier.php">Panier <span style="font-size:15px; margin-top : -2000px;"><?php if ($panier_count > 0) {print $panier_count; if ($panier_count == 1) echo " produit"; else echo " produits";}?></span></a></li>
+				<li class="bouton_gauche active"><a href="../html/admin_panel.php">Panel administrateur</a></li>
+				<?php include '../php/onglet_connect.php'; ?>
+			</ul>
+		</header>
+		<h1>Gestion des utilisateurs</h1>
+		<h2>Liste des utilisateurs</h2>
 <?php
 include ('../php/load_db_file.php');
 $accounts = read_db_file('../bdd/passwd');
@@ -21,35 +31,52 @@ foreach ($accounts as $account)
 	$dont_display= array('passwd');
 	$options = array(
 		'group' => array('admin', 'active', 'inactive'));
+	echo '<div class="table">';
+		echo '<div class="thead">';
+			echo '<div class="tr">';
+				echo '<div class="td">Nom</div>';
+				echo '<div class="td">Mot de passe</div>';
+				echo '<div class="td">Catégorie</div>';
+				echo '<div class="td">Action</div>';
+			echo '</div>';
+		echo '</div>';
+	echo '<div class="tbody">';
 	echo '<form class="tr" method="POST" action="../php/modif_account.php'
-	.	'?redirect_url=' . $_SERVER['REQUEST_URI'] . "\">\n";
+	.	'?redirect_url=' . $_SERVER['REQUEST_URI'] . "\">";
 	foreach ($account as $info => $value)
 	{
 		if (array_key_exists($info, $options))
 		{
-			echo  '<select class="td" name="' . $info  . '">' . "\n";
+			echo  '<div class="td"><select class="td" name="' . $info  . '">';
 			foreach($options[$info] as $option)
 			{
 				echo  '<option value="' . $option . '"';
 				if ($account[$info] == $option)
 					echo 'selected';
-				echo '>'  . $option . '</option>' . "\n";
+				echo '>'  . $option . '</option>';
 			}
-			echo '</select>';
+			echo '</select></div>';
 		}
 		else
 		{
-			echo '<input class="td" name="' . $info . '" value="';
+			$affich;
+			if (!in_array($info, $dont_display))
+				$affich = "text";
+			else
+				$affich = "password";
+			echo '<div class="td"><input class="td" type="'.$affich.'" name="' . $info . '" value="';
 			if (!in_array($info, $dont_display))
 				echo htmlspecialchars($value, ENT_QUOTES);
 			echo '"';
 			if (in_array($info, $non_modifiable))
 				echo 'readonly';
-			echo " />\n";
+			echo " /></div>";
 		}
 	}
-	echo "\n" . '<input class="td" name="submit" type="submit" value="OK">' . "\n";
-	echo "<br />\n";
+	echo '<div class="td"><input class="td" name="submit" type="submit" value="OK"></div>';
+	//echo "<br />\n";
+	echo '</div>';
+echo '</div>';
 }
 /*
 disabled="disabled" />'

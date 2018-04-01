@@ -21,7 +21,8 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 			<ul id="menu_horizontal">
 				<li class="bouton_gauche"><a href="../index.php">Accueil</a></li>
 				<li class="bouton_gauche"><a href="../html/boutique.php">Boutique</a></li>
-				<li class="bouton_gauche active"><a href="panier.php">Panier <span style="font-size:15px; margin-top : -2000px;"><?php if ($panier_count > 0) {print $panier_count; if ($panier_count == 1) echo " produit"; else echo " produits";}?></span></a></li>
+				<li class="bouton_gauche"><a href="panier.php">Panier <span style="font-size:15px; margin-top : -2000px;"><?php if ($panier_count > 0) {print $panier_count; if ($panier_count == 1) echo " produit"; else echo " produits";}?></span></a></li>
+				<li class="bouton_gauche active"><a href="../html/admin_panel.php">Panel administrateur</a></li>
 				<?php include '../php/onglet_connect.php'; ?>
 			</ul>
 		</header>
@@ -77,7 +78,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 	}
 ?>
 </div>
-		<button onClick="location.href='create_article.php'">Ajout</button>
+		<button onClick="location.href='create_article.php'">Ajouter un article</button>
 
 <br>
 <br>
@@ -124,7 +125,7 @@ if (!empty($_GET['categorie']))
 	}
 ?>
 </div>
-		<button onClick="location.href='create_categorie.php'">Ajout</button><br>
+		<button onClick="location.href='create_categorie.php'">Ajouter une catégorie</button><br><br>
 		<button onClick="location.href='user_list.php'">Accès a la liste des utilisateurs</button>
 		<button onClick="location.href='boutique.php'">Accès a la boutique</button>
 
