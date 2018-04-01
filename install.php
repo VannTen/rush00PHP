@@ -1,10 +1,8 @@
 <?php
 include __DIR__ . '/php/auth.php';
 
-if (!file_exists("../bdd"))
-	mkdir("../bdd", 0777, true);
-if (!file_exists("../bdd"))
-	mkdir("../bdd", 0777, true);
+if (!file_exists("bdd"))
+	mkdir("bdd", 0777, true);
 
 // utilisateur
 $admin = array('login' => 'admin',
