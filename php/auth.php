@@ -28,7 +28,7 @@ function get_account($login)
 	$accounts = read_db_file("../bdd/passwd");
 	foreach($accounts as $account)
 	{
-		if ($account['login'] == $login);
+		if ($account['login'] == $login)
 		return ($account);
 	}
 	return (NULL);
@@ -48,6 +48,8 @@ function commit_account($new_account)
 				break ;
 			}
 		}
+		if (!($result))
+			$accounts['data'][] = $new_account;
 	}
 	else
 	{
@@ -57,5 +59,9 @@ function commit_account($new_account)
 	}
 	commit_db_file($accounts);
 	return ($result);
+}
+function reinit_account()
+{
+	unlink("../bdd/passwd");
 }
 ?>

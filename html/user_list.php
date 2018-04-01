@@ -41,7 +41,7 @@ foreach ($accounts as $account)
 		{
 			echo '<input class="td" name="' . $info . '" value="';
 			if (!in_array($info, $dont_display))
-				echo $value;
+				echo htmlspecialchars($value, ENT_QUOTES);
 			echo '"';
 			if (in_array($info, $non_modifiable))
 				echo 'readonly';
