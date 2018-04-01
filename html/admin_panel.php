@@ -66,7 +66,6 @@ if (!empty($_GET['categorie']))
 						echo '<div class="td"><input type="text" name="name" value="'.$elem['id'].'" disabled="disabled" /><input type="hidden" name="name" value="'.$elem['id'].'" /></div>';
 						echo '<div class="td"><input type="text" name="name" value="'.$elem['client'].'" disabled="disabled" /><input type="hidden" name="name" value="'.$elem['client'].'" /></div>';
 						echo '<div class="td"><span class="text">';
-						$value = 0;
 						foreach($elem["panier"] as $key=>$elem4)
 						{
 							$element = '';
@@ -79,15 +78,15 @@ if (!empty($_GET['categorie']))
 								{
 									$element = $elem2['name'];
 									$quantity = $elem4;
-									$value += $elem2['prix'] * $elem4;
 								}
 							}
 							$element = htmlspecialchars($element, ENT_QUOTES);
 							echo $quantity.' '.$element."<br>";
 						}
-
+						if (empty($elem["total"]))
+							$elem["total"] = 0;
 						echo '</span></div>';
-						echo '<div class="td"><input type="text" name="valeur" value="'.$value.' €" disabled="disabled" /><input type="hidden" name="valeur" value="'.$value.'" /></div>';
+						echo '<div class="td"><input type="text" name="valeur" value="'.$elem["total"].' €" disabled="disabled" /><input type="hidden" name="valeur" value="'.$elem["total"].'" /></div>';
 						echo '</form>';
 					}
 				}

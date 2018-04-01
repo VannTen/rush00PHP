@@ -54,10 +54,10 @@ if (file_exists("bdd/commande"))
 	$fd = fopen("bdd/commande", "c+");
 	flock($fd, LOCK_EX);
 	$file = array(
-		array('id'=>1, 'client'=>"admin", 'panier'=>array(1=>1,2=>1,3=>1)),
-		array('id'=>2, 'client'=>"user", 'panier'=>array(3=>4,5=>2,4=>1)),
-		array('id'=>3, 'client'=>"user", 'panier'=>array(2=>4,5=>1,4=>1)),
-		array('id'=>4, 'client'=>"admin", 'panier'=>array(1=>4,3=>1,2=>2))
+		array('id'=>1, 'client'=>"admin", 'panier'=>array(1=>1,2=>1,3=>1), 'total'=>2115),
+		array('id'=>2, 'client'=>"user", 'panier'=>array(3=>4,5=>2,4=>1), 'total'=>7854),
+		array('id'=>3, 'client'=>"user", 'panier'=>array(2=>4,5=>1,4=>1), 'total'=>1200),
+		array('id'=>4, 'client'=>"admin", 'panier'=>array(1=>4,3=>1,2=>2), 'total'=>789)
 	);
 	$serial = serialize($file);
 	file_put_contents("bdd/commande", $serial);

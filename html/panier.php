@@ -64,6 +64,7 @@ if (!empty($_SESSION["panier"]))
 				foreach ($file as $elt)
 					if ($elt['id'] == $key)
 						$val += $value * $elt['prix'];
+			$_SESSION['total_commande'] = $val;
 			echo '<tbody>';
 			foreach ($_SESSION["panier"] as $key=>$value)
 				foreach ($file as $elt)

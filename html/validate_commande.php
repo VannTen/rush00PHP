@@ -2,6 +2,7 @@
 session_start();
 $panier_count = 0;
 if (!empty($_SESSION["panier"]))
+{
 	$panier_count = sizeof($_SESSION["panier"]);
 ?>
 <html>
@@ -52,7 +53,7 @@ if (!empty($_SESSION["panier"]) && !empty($_SESSION["logged_on_user"]) && !empty
 				$id_max++;
 			}
 		}
-		$file[] = array('id'=>$id, 'client'=>$_SESSION["logged_on_user"], 'panier'=>$_SESSION["panier"]);
+		$file[] = array('id'=>$id, 'client'=>$_SESSION["logged_on_user"], 'panier'=>$_SESSION["panier"], 'total'=>$_SESSION['total_commande']);
 		$serial = serialize($file);
 		file_put_contents("../bdd/commande", $serial);
 		flock($fd, LOCK_UN);
@@ -68,3 +69,10 @@ $_SESSION["panier"] = array();
 <footer></footer>
 </body>
 </html>
+<?php
+}
+else
+{
+	header("location:../index.php");
+}
+?>
