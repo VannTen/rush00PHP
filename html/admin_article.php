@@ -42,13 +42,19 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 			echo '<div class="tbody">';
 			foreach ($file as $elem)
 			{
+				$elem['name'] = htmlspecialchars($elem['name'], ENT_QUOTES);
+				$elem['description'] = htmlspecialchars($elem['description'], ENT_QUOTES);
+
 				echo '<form class="tr" action="../php/mod_supr_art.php" method="post">';
 				echo '<div class="td">'.$elem['name'].'<input type="hidden" name="name" value="'.$elem['name'].'" /></div>';
 				echo '<div class="td">'.$elem['description'].'<input type="hidden" name="description" value="'.$elem['description'].'" /></div>';
 				echo '<div class="td">';
 				$N = count($elem["categorie"]);
 				for($i=0; $i < $N; $i++)
+				{
+					$elem['categorie'][$i] = htmlspecialchars($elem['categorie'][$i], ENT_QUOTES);
 					echo($elem["categorie"][$i]."<br>");
+				}
 				echo '</div>';
 				echo '<div class="td">'.$elem['prix'].'<input type="hidden" name="prix" value="'.$elem['prix'].'" /></div>';
 				echo '<div class="td action"><input type="submit" name="submit" value="Modifier"><input type="submit" name="submit" value="Supprimer"></div>';
@@ -90,6 +96,7 @@ if (!empty($_GET['categorie']))
 			echo '<div class="tbody">';
 			foreach ($file as $elem)
 			{
+				$elem['name'] = htmlspecialchars($elem['name'], ENT_QUOTES);
 				echo '<form class="tr" action="../php/mod_supr_cat.php" method="post">';
 				echo '<div class="td"><input type="text" name="name" value="'.$elem['name'].'" disabled="disabled" /><input type="hidden" name="name" value="'.$elem['name'].'" /></div>';
 				echo '<div class="td action"><input type="submit" name="submit" value="Modifier"><input type="submit" name="submit" value="Supprimer"></div>';

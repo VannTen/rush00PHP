@@ -56,6 +56,7 @@ else
 {
 	header("location:../html/modif_categorie.php?erreur=data_problem");
 }
+}
 else {
 	header("location:../index.php");
 }

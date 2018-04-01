@@ -30,9 +30,9 @@ if (!empty($_GET['erreur']))
 ?>
 <html><body>
 <form action="../php/modif_article.php" method="post">
-	Nom: <input type="text" name="newname" value="<?php echo $name; ?>" required /><input type="hidden" name="name" value="<?php echo $name; ?>"/>
+	Nom: <input type="text" name="newname" value="<?php echo htmlspecialchars($name, ENT_QUOTES); ?>" required /><input type="hidden" name="name" value="<?php echo htmlspecialchars($name, ENT_QUOTES); ?>"/>
 	<br />
-	description: <input type="text" name="description" value="<?php echo $description; ?>" required />
+	description: <input type="text" name="description" value="<?php echo htmlspecialchars($description, ENT_QUOTES); ?>" required />
 	<br />
 	<?php
 		$exist = false;
@@ -40,7 +40,7 @@ if (!empty($_GET['erreur']))
 		$file = unserialize($data);
 		foreach ($file as $elt)
 		{
-			echo '<input type="checkbox" name="categorie[]" value="'.$elt['value'].'" ';
+			echo '<input type="checkbox" name="categorie[]" value="'.htmlspecialchars($elt['value'], ENT_QUOTES).'" ';
 			if ($categorie!="" && in_array($elt['value'], $categorie))
 				echo 'checked';
 			echo ' >'.$elt['name'];

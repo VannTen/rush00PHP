@@ -38,7 +38,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 		$file = unserialize($data);
 		foreach ($file as $elt)
 		{
-			echo '<input type="checkbox" name="categorie[]" value="'.$elt['value'].'" ';
+			echo '<input type="checkbox" name="categorie[]" value="'.htmlspecialchars($elt['value'], ENT_QUOTES).'" ';
 			if ($categorie!="" && in_array($elt['value'], $categorie))
 				echo 'checked';
 			echo ' >'.$elt['name'];

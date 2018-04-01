@@ -19,7 +19,7 @@ function session_login($login, $passwd)
 }
 if (array_key_exists('login', $_POST)
 	&& array_key_exists('passwd', $_POST)
-	&& isset($_POST['submit']) && $_POST['submit'] == 'OK'
+	&& isset($_POST['submit']) && $_POST['submit'] == 'Ok'
 	&& isset($_SESSION))
 {
 	if (session_login($_POST['login'], $_POST['passwd']))

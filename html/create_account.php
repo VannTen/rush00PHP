@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="../css/menu.css" />
+		<link href="../css/menu.css" rel="stylesheet" media="all" type="text/css">
 		<title>Création de compte</title>
 
 	</head>
@@ -20,7 +21,7 @@
 			<form  class="user_info_boxes" action="../php/create_account.php" method="POST">
 				<p>Identifiant : <input name="login" type="text" /></p>
 				<p>Mot de passe : <input name="passwd" type="password" /></p>
-				<input name="submit" type="submit" value="OK" />
+				<input name="submit" type="submit" value="Ok" />
 			</form>
 		</div>
 		</main>

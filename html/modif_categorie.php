@@ -18,7 +18,7 @@ if (!empty($_GET['erreur']))
 ?>
 <html><body>
 <form action="../php/modif_categorie.php" method="post">
-	Nom: <input type="text" name="newname" value="<?php echo $name; ?>" required /><input type="hidden" name="name" value="<?php echo $name; ?>"/>
+	Nom: <input type="text" name="newname" value="<?php echo htmlspecialchars($name, ENT_QUOTES); ?>" required /><input type="hidden" name="name" value="<?php echo htmlspecialchars($name, ENT_QUOTES); ?>"/>
 	<br />
 	<input type="submit" name="submit" value="OK" />
 </form>

@@ -51,6 +51,7 @@ if (!empty($_SESSION["panier"]))
 				foreach ($file as $elt)
 					if ($elt['name'] == $key)
 					{
+						$elt['name'] = htmlspecialchars($elt['name'], ENT_QUOTES);
 						echo "<span style='color : white'> Nom : ".$elt['name']." Quantité : ".$value." Prix : ".$value * $elt['prix']."€</span>";
 						echo "<button onClick='location.href=\"panier.php?ajouter=".$elt['name']."\"'>Ajouter</button>";
 						echo "<button onClick='location.href=\"panier.php?enlever=".$elt['name']."\"'>";
@@ -86,10 +87,7 @@ if (!empty($_SESSION["panier"]))
 				echo 'alert(\'Votre panier est vide\')';
 		}
 		else
-		?>
-			echo 'alert(\'Vous devez etre connecté pour finaliser votre commande\')';
-		<?php
-	}
+			echo 'document.location.href=\'login.php?redirect=panier\'';
 	?>
 		">Valider votre commande</button>
 		<button onClick='location.href="boutique.php"'>Continuez vos achats</button>

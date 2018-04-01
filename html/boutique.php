@@ -39,26 +39,28 @@ if (file_exists("../bdd/article"))
 	$file2 = unserialize($data2);
 	foreach ($file as $elt)
 	{
-		echo "<br><br><div style='width: 100%; color:black; background-color: lightgrey; border-radius: 10px; text-align:center; height: 35px; vertical-align: middle; line-height: 35px; font-size:22px'>".$elt['name']."</div><br>";
+		$exist = "";
 		foreach ($file2 as $elt2)
 		{
 			if (in_array($elt['value'], $elt2['categorie']))
 			{
-				echo '<div style="display: inline-block;border-radius: 5px; padding-right: auto; width : 20%; text-align:center;
+				$elt2['name'] = htmlspecialchars($elt2['name'], ENT_QUOTES);
+				$elt2['description'] = htmlspecialchars($elt2['description'], ENT_QUOTES);
+				$exist .= '<div style="display: inline-block;border-radius: 5px; padding-right: auto; width : 20%; text-align:center;
 				min-width:200px; padding-left: auto; border : 1px solid black; margin-right: 10px; line-height : 1.6;
 				margin-bottom: 10px; background-color:FloralWhite;">';
 
-				echo '<span style="color:black">Nom : '.$elt2['name'].' <br></span>';
-				echo '<span style="color:black">Description : '.$elt2['description'].' <br></span>';
-				echo '<span style="color:black">Catégorie : ';
-				$N = count($elt2["categorie"]);
-				for($i=0; $i < $N; $i++)
-					echo($elt2["categorie"][$i]."<br>");
-				echo ' <br></span>';
-				echo '<span style="color:black">Prix : '.$elt2['prix'].' €<br></span>';
-				echo "<button onClick='location.href=\"boutique.php?ajouter=".$elt2['name']."\"'>Ajouter produit</button><br>";
-				echo '</div>';
+				$exist .= '<span style="color:black">Nom : '.$elt2['name'].' <br></span>';
+				$exist .= '<span style="color:black">Description : '.$elt2['description'].' <br></span>';
+				$exist .=  '<span style="color:black">Prix : '.$elt2['prix'].' €<br></span>';
+				$exist .=  "<button onClick='location.href=\"boutique.php?ajouter=".$elt2['name']."\"'>Ajouter produit</button><br>";
+				$exist .=  '</div>';
 			}
+		}
+		if ($exist != "")
+		{
+			echo "<br><br><div style='width: 100%; color:black; background-color: lightgrey; border-radius: 10px; text-align:center; height: 35px; vertical-align: middle; line-height: 35px; font-size:22px'>".$elt['name']."</div><br>";
+			echo $exist;
 		}
 	}
 }
