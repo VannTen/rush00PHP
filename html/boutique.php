@@ -63,7 +63,7 @@ if (file_exists("../bdd/article"))
 				margin-bottom: 10px; background-color:FloralWhite;">';
 
 				$exist .= '<span style="color:black">Nom : '.$elt2['name'].' <br></span>';
-				$exist .= '<span style="color:black"><img src="'.$elt2['description'].'"> <br></span>';
+				if ($elt2['image'] != 'none') $exist .= '<span><img src="'.$elt2['image'].'" style="heigth : 40%; width : 40%"> <br></span>';
 				$exist .= '<span style="color:black">Description : '.$elt2['description'].' <br></span>';
 				$exist .=  '<span style="color:black">Prix : '.$elt2['prix'].' €<br></span>';
 				$exist .=  "<button onClick='location.href=\"boutique.php?ajouter="; $exist .= $elt2['id']; $exist .= "\"'>Ajouter produit</button><br>";

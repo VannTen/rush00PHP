@@ -42,7 +42,7 @@ input[type=text], input[type=password]{
 }
 
 .overf {
-	max-height : 200px;
+	max-height : 500px;
 	overflow-x : auto;
 }
 

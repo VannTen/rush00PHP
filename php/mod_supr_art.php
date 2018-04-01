@@ -11,11 +11,12 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 			if ($elt['name'] == $_POST['name'])
 			{
 				$categorie = $elt['categorie'];
+				$img = $elt['image'];
 				$exist = true;
 			}
 		if ($exist == true)
 		{
-			$_SESSION['article_modif'] = array('name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>array($categorie), 'prix'=>$_POST['prix']);
+			$_SESSION['article_modif'] = array('name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>array($categorie), 'prix'=>$_POST['prix'], 'image'=>$img);
 			if ($_POST['submit'] == "Modifier")
 				header("location:../html/modif_article.php");
 			elseif ($_POST['submit'] == "Supprimer")

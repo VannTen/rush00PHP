@@ -5,7 +5,7 @@ $_SESSION['article_ajout'] = "";
 $_SESSION['article_modif'] = "";
 if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 {
-if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['categorie']) && !empty($_POST['prix']) && !empty($_POST['image']) && !empty($_POST['submit']))
+if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['categorie']) && !empty($_POST['prix']) && !empty($_POST['submit']))
 {
 	if (!preg_match_all("/^[0-9]+$/", $_POST['prix']))
 	{
@@ -18,7 +18,10 @@ if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['ca
 	elseif (!file_exists("../bdd/article"))
 	{
 		$id = 1;
-		$img = 'data:image/png;base64,'.base64_encode(file_get_contents($_POST['image']));
+		if (!empty($_POST['image']))
+			$img = $_POST['image'];
+		else
+			$img = 'none';
 		$data = array(array('id'=>$id, 'name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>$_POST['categorie'], 'prix'=>$_POST['prix'], 'image'=>$img, 'status'=>'visible'));
 		$serial = serialize($data);
 		file_put_contents("../bdd/article", $serial);
@@ -26,7 +29,10 @@ if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['ca
 	}
 	else
 	{
-		$img = 'data:image/png;base64,'.base64_encode(file_get_contents($_POST['image']));
+		if (!empty($_POST['image']))
+			$img = $_POST['image'];
+		else
+			$img = 'none';
 		$exist = false;
 		$fd = fopen("../bdd/article", "c+");
 		flock($fd, LOCK_EX);
@@ -64,7 +70,7 @@ if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['ca
 }
 else{
 	$categorie = $_POST['categorie'];
-	$_SESSION['article_ajout'] = array('name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>array($categorie), 'prix'=>$_POST['prix'], 'image'=>$_POST['image'];
+	$_SESSION['article_ajout'] = array('name'=>$_POST['name'], 'description'=>$_POST['description'], 'categorie'=>array($categorie), 'prix'=>$_POST['prix'], 'image'=>$_POST['image']);
 
 	header("location:../html/create_article.php?erreur=data_problem");
 }

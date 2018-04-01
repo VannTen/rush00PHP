@@ -8,6 +8,7 @@ if (!empty($_SESSION['article_modif']))
 	$description = $_SESSION['article_modif']['description'];
 	$categorie = $_SESSION['article_modif']['categorie'][0];
 	$prix = $_SESSION['article_modif']['prix'];
+	$image = $_SESSION['article_modif']['image'];
 }
 else
 {
@@ -15,6 +16,7 @@ else
 	$description = '';
 	$categorie = '';
 	$prix = '';
+	$image = '';
 }
 ?>
 <?php
@@ -48,6 +50,8 @@ if (!empty($_GET['erreur']))
 	?>
 	<br />
 	Prix: <input type="text" name="prix" value="<?php echo $prix; ?>" required />
+	<br />
+		Image: <input type="text" name="image" value="<?php echo $image; ?>" />
 	<br />
 	<input type="submit" name="submit" value="OK" />
 </form>

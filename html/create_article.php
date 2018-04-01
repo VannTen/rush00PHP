@@ -50,7 +50,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 	<br />
 	Prix: <input type="text" name="prix" value="<?php echo $prix; ?>" required />
 	<br />
-	Image: <input type="text" name="image" value="<?php echo $image; ?>" required />
+	Image: <input type="text" name="image" value="<?php echo $image; ?>" />
 	<br />
 	<input type="submit" name="submit" value="OK" />
 	<br />

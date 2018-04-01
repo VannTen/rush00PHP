@@ -2,7 +2,9 @@
 	session_start();
 if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 	{
-
+		$panier_count = 0;
+		if (!empty($_SESSION["panier"]))
+			$panier_count = sizeof($_SESSION["panier"]);
 ?>
 <!DOCTYPE html>
 <html>

@@ -24,6 +24,10 @@ if (!empty($_POST['newname']) && !empty($_POST['name']) && !empty($_POST['descri
 		}
 		if ($exist == false)
 		{
+			if (!empty($_POST['image']))
+				$img = $_POST['image'];
+			else
+				$img = 'none';
 			$modify = false;
 			$fd = fopen("../bdd/article", "c+");
 			flock($fd, LOCK_EX | LOCK_SH);
@@ -38,6 +42,7 @@ if (!empty($_POST['newname']) && !empty($_POST['name']) && !empty($_POST['descri
 					$file[$i]['description'] = $_POST['description'];
 					$file[$i]['categorie'] = $_POST['categorie'];
 					$file[$i]['prix'] = $_POST['prix'];
+					$file[$i]['image'] = $img;
 					$modify = true;
 				}
 				$i++;

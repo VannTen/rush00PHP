@@ -6,7 +6,9 @@
 	$_SESSION['categorie_ajout'] = "";
 if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 	{
-
+		$panier_count = 0;
+		if (!empty($_SESSION["panier"]))
+			$panier_count = sizeof($_SESSION["panier"]);
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,6 +45,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 				echo '<div class="thead">';
 					echo '<div class="tr">';
 						echo '<div class="td">Name</div>';
+						echo '<div class="td">Image</div>';
 						echo '<div class="td">Description</div>';
 						echo '<div class="td">Categorie</div>';
 						echo '<div class="td">Prix</div>';
@@ -60,6 +63,10 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 
 				echo '<form class="tr" action="../php/mod_supr_art.php" method="post">';
 				echo '<div class="td"><span class="text">'.$elem['name'].'<input type="hidden" name="name" value="'.$elem['name'].'" /></span></div>';
+				if ($elem['image'] != 'none')
+					echo '<div class="td"><span><img src="'.$elem['image'].'" style="width: 150px; max-height: 100px;display: block;margin-left: auto;margin-right: auto;"> <br></span></div>';
+				else
+					echo '<div class="td"><span>Pas d\'image pour cette article</span></div>';
 				echo '<div class="td"><span class="text">'.$elem['description'].'<input type="hidden" name="description" value="'.$elem['description'].'" /></span></div>';
 				echo '<div class="td"><span class="text">';
 				$N = count($elem["categorie"]);
@@ -69,7 +76,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 					echo($elem["categorie"][$i]."<br>");
 				}
 				echo '</span></div>';
-				echo '<div class="td"><span class="text">'.$elem['prix'].'<input type="hidden" name="prix" value="'.$elem['prix'].'" /></span></div>';
+				echo '<div class="td"><span class="text">'.$elem['prix'].' €<input type="hidden" name="prix" value="'.$elem['prix'].'" /></span></div>';
 				echo '<div class="td"><span class="text">'.$elem['status'].'<input type="hidden" name="status" value="'.$elem['status'].'" /></span></div>';
 				echo '<div class="td action"><input type="submit" name="submit" value="Modifier"><input type="submit" name="submit" value="Supprimer"></div>';
 				echo '</form>';
