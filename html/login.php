@@ -34,6 +34,9 @@ if (isset($_GET['login']))
 	case 'invalid':
 		echo "Invalid parameters !\n";
 		break ;
+	case 'disabled':
+		echo "Account has been deactivated\n";
+		break ;
 	}
 	echo '</span>';
 }

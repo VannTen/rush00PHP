@@ -27,9 +27,10 @@ $account = get_account($_SESSION['logged_on_user']);
 $non_modifiable= array('login');
 $dont_display= array('passwd');
 ?>
-<form class="tr" method="POST" action="<?php echo "../php/modif_account.php?redirect_url=" . $_SERVER['REQUEST_URI'] ?>" >
+<form class="tr" method="POST" action="<?php echo "../php/modif_account.php?redirect_url=" .
+explode('?' ,$_SERVER['REQUEST_URI'])[0] ?>" >
 <span class="text">Identifiant :</span>
-<input class="td" name="login" value="<?php echo htmlspecialchars($_SESSION['logged_on_user'])?>" readonly />
+<input class="td" name="login" value="<?php echo htmlspecialchars($_SESSION['logged_on_user'])?>" disabled />
 <br /><span class="text">Ancien mot de passe :</span>
 <input class="td" name="current_passwd" value"" />
 <br /><span class="text">Nouveau mot de passe :</span>
@@ -38,6 +39,20 @@ $dont_display= array('passwd');
 <input class="td" name="submit" type="submit" value="OK">
 <br />
 	</form>
+<?php
+	if (isset($_GET['modif']))
+	{
+		switch ($_GET['modif'])
+		{
+		case 'ok':
+			echo '<span class="confirm_text">Successfully modified</span>' . "\n";
+			break ;
+		case 'fail':
+			echo '<span class="confirm_text">Bad password</span>' . "\n";
+			break ;
+		}
+	}
+?>
 	</div>
 	</body>
 	</html>

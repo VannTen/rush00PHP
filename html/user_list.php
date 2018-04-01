@@ -46,7 +46,7 @@ foreach ($accounts as $account)
 		'group' => array('admin', 'active', 'inactive'));
 
 	echo '<form class="tr" method="POST" action="../php/modif_account.php'
-	.	'?redirect_url=' . $_SERVER['REQUEST_URI'] . "\">";
+	.	'?redirect_url='  . explode('?',$_SERVER['REQUEST_URI'])[0] . "\">";
 	foreach ($account as $info => $value)
 	{
 		if (array_key_exists($info, $options))
@@ -81,6 +81,20 @@ foreach ($accounts as $account)
 	echo '</form>';
 	//echo "<br />\n";
 }
+	if (isset($_GET['modif']))
+	{
+echo '<span class="confirm_text">';
+		switch ($_GET['modif'])
+		{
+		case 'ok':
+			echo "Successfully modified\n";
+			break ;
+		case 'fail':
+			echo "No modification done\n";
+			break ;
+		}
+echo '<span>';
+	}
 echo '</div>';
 echo '</div>';
 /*
