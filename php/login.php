@@ -19,20 +19,20 @@ function session_login($login, $passwd)
 }
 if (array_key_exists('login', $_POST)
 	&& array_key_exists('passwd', $_POST)
-	&& isset($_POST['submit']) && $_POST['submit'] == 'Ok'
+	&& isset($_POST['submit']) && $_POST['submit'] == 'OK'
 	&& isset($_SESSION))
 {
 	if (session_login($_POST['login'], $_POST['passwd']))
 		header("location:../index.php");
 	else
 	{
-		header("location:../html/login.php");
+		header("location:../html/login.php?wqwqwq");
 	}
 }
 else
 {
 	$_SESSION['logged_on_user'] = "";
 	$_SESSION['group'] = "";
-	header("location:../html/login.php");
+	header("location:../html/login.php?erere");
 }
 ?>

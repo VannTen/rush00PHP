@@ -23,9 +23,8 @@
 			</ul>
 		</header>
 
-		<footer id="footer">
-			<hr>
-			<p id="copyright">© ajugnon 2018</p>
-		</footer>
-    </body>
+<div>
+
+<div>
+	</body>
 </html>
