@@ -8,6 +8,7 @@ function modif_account($login, $new_values)
 	$can_modify = array(
 		'active' => array('passwd'),
 		'admin' => array('passwd', 'group'));
+	$cannot_be_empty = array('passwd', 'group');
 	$account = get_account($login);
 	if ($account != NULL)
 	{
@@ -16,7 +17,9 @@ function modif_account($login, $new_values)
 		{
 			if (array_key_exists($info, $new_values))
 			{
-				if (in_array($info, $can_modify[$_SESSION['group']]))
+				if (in_array($info, $can_modify[$_SESSION['group']])
+					&& !(in_array($info, $cannot_be_empty)
+						&& $new_values[$info] == ''))
 				{
 					if ($info == 'passwd')
 					{
