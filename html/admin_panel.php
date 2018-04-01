@@ -66,10 +66,10 @@ if (!empty($_GET['categorie']))
 						echo '<div class="td"><input type="text" name="name" value="'.$elem['id'].'" disabled="disabled" /><input type="hidden" name="name" value="'.$elem['id'].'" /></div>';
 						echo '<div class="td"><input type="text" name="name" value="'.$elem['client'].'" disabled="disabled" /><input type="hidden" name="name" value="'.$elem['client'].'" /></div>';
 						echo '<div class="td"><span class="text">';
+						$value = 0;
 						foreach($elem["panier"] as $key=>$elem4)
 						{
 							$element = '';
-							$value = 0;
 							$quantity = 0;
 							$data2 = file_get_contents("../bdd/article");
 							$file2 = unserialize($data2);
@@ -79,8 +79,8 @@ if (!empty($_GET['categorie']))
 								{
 									$element = $elem2['name'];
 									$quantity = $elem4;
+									$value += $elem2['prix'] * $elem4;
 								}
-								$value += $elem2['prix'] * $elem4;
 							}
 							$element = htmlspecialchars($element, ENT_QUOTES);
 							echo $quantity.' '.$element."<br>";
