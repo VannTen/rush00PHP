@@ -22,9 +22,9 @@
 				<?php include 'php/onglet_connect2.php'; ?>
 			</ul>
 		</header>
-
-<div>
-
-<div>
+<div></div>
+<div><div><span class="text">Inscrivez vous</span></div></div>
+<div><div><span class="text">Connectez vous</span></div></div>
+<div><div><span class="text">Accédez à notre boutique</span></div></div>
 	</body>
 </html>

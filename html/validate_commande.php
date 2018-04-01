@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_SESSION["panier"] = array();
 ?>
 <html>
 	<head>
@@ -19,8 +18,52 @@ $_SESSION["panier"] = array();
 		</header>
 		<div id="../php/login.php">
 			<h1>Validation de commande</h1>
-			<p>Votre commande à bien été enregistrée.
-		</div>
-		<footer></footer>
-	</body>
+
+
+<?php
+if (!empty($_SESSION["panier"]) && !empty($_SESSION["logged_on_user"]) && !empty($_SESSION["logged_on_user"]))
+{
+	if (!file_exists("../bdd/commande"))
+	{
+		$id = 1;
+		$data = array(array('id'=>$id, 'client'=>$_SESSION["logged_on_user"], 'panier'=>$_SESSION["panier"]));
+		$serial = serialize($data);
+		file_put_contents("../bdd/commande", $serial);
+		echo "<p>Votre commande à bien été enregistrée.</p>";
+	}
+	else
+	{
+		$exist = false;
+		$fd = fopen("../bdd/commande", "c+");
+		flock($fd, LOCK_EX | LOCK_SH);
+		$data = file_get_contents("../bdd/commande");
+		$file = unserialize($data);
+		$id = 1;
+		foreach ($file as $elt)
+		{
+			if ($elt['id'] === $id)
+				$id++;
+		}
+		if ($exist == false)
+		{
+			$file[] = array('id'=>$id, 'client'=>$_SESSION["logged_on_user"], 'panier'=>$_SESSION["panier"]);
+			$serial = serialize($file);
+			file_put_contents("../bdd/commande", $serial);
+			flock($fd, LOCK_UN);
+			echo "<p>Votre commande à bien été enregistrée.</p>";
+		}
+		else{
+			flock($fd, LOCK_UN);
+			echo "<p>Une erreur a été rencontrée</p>";
+		}
+	}
+}
+else{
+	echo "<p>Une erreur a été rencontrée</p>";
+}
+$_SESSION["panier"] = array();
+?>
+</div>
+<footer></footer>
+</body>
 </html>

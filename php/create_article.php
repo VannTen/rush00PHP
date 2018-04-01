@@ -30,12 +30,15 @@ if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['ca
 		$data = file_get_contents("../bdd/article");
 		$file = unserialize($data);
 		$id = 1;
+		$id_max = 1;
 		foreach ($file as $elt)
 		{
 			if ($elt['name'] === $_POST['name'])
 				$exist = true;
 			if ($elt['id'] === $id)
-				$id++;
+				$id = $id_max++;
+			if ($elt['id'] > $id_max)
+				$id_max = $elt['id'];
 		}
 		if ($exist == false)
 		{

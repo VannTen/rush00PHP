@@ -3,7 +3,6 @@
 	if(!empty($_SESSION['logged_on_user']))
 	{
 ?>
-
 <?php if(isset($_SESSION['group']) && $_SESSION['group'] == 'admin')
 {
 ?>
