@@ -50,6 +50,7 @@ function select_change_type()
 		else if (array_key_exists('current_passwd', $_POST) && auth($_SESSION['logged_on_user'], $_POST['current_passwd']))
 		{
 			// Called from user account management page
+			echo "call from_user";
 			return (modif_account($_SESSION['logged_on_user'], $_POST));
 		}
 	}
@@ -64,10 +65,5 @@ function select_change_type()
 if (isset($_GET['redirect_url']) && $_GET['redirect_url'] == '')
 	header('location:..' . $_GET['redirect_url'], true, 303);
 session_start();
-if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
-{
-	select_change_type();
-}else {
-	header("location:../index.php");
-}
+select_change_type();
 ?>
