@@ -1,0 +1,56 @@
+table
+{
+	display:table;
+	width: 99%;
+	border-collapse:collapse;
+}
+thead
+{
+	display:table-header-group;
+	color:white;
+	font-weight:bold;
+	background-color:#b48608;
+}
+tbody
+{
+	display:table-row-group;
+}
+tr
+{
+	display:table-row;
+}
+td
+{
+	text-align: center;
+	display:table-cell;
+	border:1px solid #b48608;
+	padding:1px;
+}
+tr.editing .td INPUT
+{
+	width:100px;
+	color:white;
+}
+
+input[type=text], input[type=password]{
+	width: 90%;
+	border:0;
+	text-align: center;
+	background-color:black;
+	color : white;
+	font-size : 20px;
+}
+
+.overf {
+	max-height : 500px;
+	overflow-x : auto;
+}
+
+.right {
+	float: right;
+}
+
+.text {
+	color:white;
+	font-size : 20px;
+}

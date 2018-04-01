@@ -7,7 +7,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 {
 if (!empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['categorie']) && !empty($_POST['prix']) && !empty($_POST['submit']))
 {
-	if (!preg_match_all("/^[0-9]+$/", $_POST['prix']))
+	if (!preg_match_all("/^[0-9]+[.]{0,1}[0-9]+$/", $_POST['prix']))
 	{
 		$categorie = $_POST['categorie'];
 

@@ -66,7 +66,7 @@ if (isset($_SESSION['group']) && $_SESSION['group'] == "admin")
 				if ($elem['image'] != 'none')
 					echo '<div class="td"><span><img src="'.$elem['image'].'" style="width: 150px; max-height: 100px;display: block;margin-left: auto;margin-right: auto;"> <br></span></div>';
 				else
-					echo '<div class="td"><span>Pas d\'image pour cette article</span></div>';
+					echo '<div class="td"><span class="text">Pas d\'image pour cette article</span></div>';
 				echo '<div class="td"><span class="text">'.$elem['description'].'<input type="hidden" name="description" value="'.$elem['description'].'" /></span></div>';
 				echo '<div class="td"><span class="text">';
 				$N = count($elem["categorie"]);

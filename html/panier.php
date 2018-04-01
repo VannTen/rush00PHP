@@ -29,6 +29,7 @@ if (!empty($_SESSION["panier"]))
 <html>
 <head>
 	<link href="../css/menu.css" rel="stylesheet" media="all" type="text/css">
+	<link href="../css/table.css" rel="stylesheet" media="all" type="text/css">
 	<title>Gestion du panier</title>
 </head>
 	<body>
@@ -47,20 +48,31 @@ if (!empty($_SESSION["panier"]))
 	$file = unserialize($data);
 	//afficher le contenu de la session
 		if (!empty($_SESSION["panier"]))
+		echo '<table style="width:50%">';
+			echo '<thead>';
+				echo '<tr>';
+					echo '<th>Nom</th>';
+					echo '<th>Quantité</th>';
+					echo '<th>Prix</th>';
+				echo '</tr>';
+			echo '</thead>';
+			echo '<tbody>';
 			foreach ($_SESSION["panier"] as $key=>$value)
 				foreach ($file as $elt)
 					if ($elt['id'] == $key)
 					{
 						$elt['name'] = htmlspecialchars($elt['name'], ENT_QUOTES);
-						echo "<span style='color : white'> Nom : ".$elt['name']." Quantité : ".$value." Prix : ".$value * $elt['prix']."€</span>";
-						echo "<button onClick='location.href=\"panier.php?ajouter=".$elt['id']."\"'>Ajouter</button>";
+						echo "<tr><td><span class='text'>".$elt['name']."</span></td><td><span class='text'>".$value."</span></td><td><span class='text'>".$value * $elt['prix']."€</span></td>";
+						echo "<td style='width:20%'><button onClick='location.href=\"panier.php?ajouter=".$elt['id']."\"'>Ajouter</button>";
 						echo "<button onClick='location.href=\"panier.php?enlever=".$elt['id']."\"'>";
 						if ($value == 0)
 							echo "Supprimer";
 						else
 							echo "Enlever";
-						echo "</button><br>";
+						echo "</button></td></tr>";
 					}
+			echo '</tbody>';
+		echo '</table>'
 ?>
 <div style="width:100%">
 		<button onClick='location.href="panier.php?vider=1"'>Vider le panier</button>
